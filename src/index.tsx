@@ -5,13 +5,17 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import theme from "./theme";
-
+import { Provider } from "react-redux";
+import "./util/axios_config";
+import store from "./store";
 ReactDOM.render(
-	<ThemeProvider theme={theme}>
-		{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-		<CssBaseline />
-		<App />
-	</ThemeProvider>,
+	<Provider store={store}>
+		<ThemeProvider theme={theme}>
+			{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+			<CssBaseline />
+			<App />
+		</ThemeProvider>
+	</Provider>,
 	document.querySelector("#root"),
 );
 // If you want your app to work offline and load faster, you can change
