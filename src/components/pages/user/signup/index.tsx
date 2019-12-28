@@ -16,8 +16,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import { useDispatch } from "react-redux";
 import FormLabel from "@material-ui/core/FormLabel";
+import { Link as RLink } from "react-router-dom";
 // import { signup as SGN } from "../../../actions/user_auth";
-import { UserGender } from "../../../actions/action_interfaces";
+import { UserGender } from "../../../../actions/action_interfaces";
+import { Blogin_user } from "../../../../util/urls";
+import { Flogin_user, Fvalidate_user } from "../../../../util/page_urls";
 
 function Copyright() {
 	return (
@@ -241,12 +244,20 @@ const SignUp = () => {
 					</Button>
 					<Grid container>
 						<Grid xs={12} item>
-							<Link href="#" variant="body2">
+							<Link
+								component={RLink}
+								to={Flogin_user}
+								variant="body2"
+							>
 								حساب کاربری دارید ؟ صفحه ورود
 							</Link>
 						</Grid>
 						<Grid item xs={12} className={classes.itemPadding}>
-							<Link href="#" variant="body2">
+							<Link
+								component={RLink}
+								to={Fvalidate_user}
+								variant="body2"
+							>
 								صفحه تایید ایمیل
 							</Link>
 						</Grid>
