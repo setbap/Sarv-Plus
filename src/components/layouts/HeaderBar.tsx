@@ -7,8 +7,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Link as RLink } from "react-router-dom";
-import { Flogin_user, Fsignup } from "../../util/page_urls";
+import { Flogin_user, Fsignup, Findex } from "../../util/page_urls";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -17,6 +16,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const HeaderBar: React.FC = () => {
 	const classes = useStyles();
+	const history = useHistory();
 
 	const [state, setState] = React.useState({
 		left: false,
@@ -109,14 +110,30 @@ const HeaderBar: React.FC = () => {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" className={classes.title}>
-						مین
+						<Button
+							color="inherit"
+							variant="outlined"
+							onClick={() => history.push(Findex)}
+						>
+							مین
+						</Button>
 					</Typography>
-					<Button color="inherit">
-						<RLink to={Flogin_user}>ورود</RLink>
+
+					<Button
+						onClick={() => history.push(Fsignup)}
+						variant="outlined"
+						color="inherit"
+						className={classes.menuButton}
+					>
+						ورود
 					</Button>
-					<RLink to={Fsignup}>
-						<Button color="primary">ایجاد حساب</Button>
-					</RLink>
+					<Button
+						onClick={() => history.push(Flogin_user)}
+						variant="outlined"
+						color="inherit"
+					>
+						ایجاد حساب
+					</Button>
 				</Toolbar>
 			</AppBar>
 			<SwipeableDrawer

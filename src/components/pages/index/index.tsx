@@ -8,7 +8,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
 import Link from "@material-ui/core/Link";
+import respect from "./image/respect.png";
+import spec from "./image/spec.png";
+import safe from "./image/safe.png";
 
 function Copyright() {
 	return (
@@ -24,6 +29,12 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+	itemSpace: {
+		marginTop: theme.spacing(2),
+	},
+	aboutMargin: {
+		marginBottom: theme.spacing(2),
+	},
 	icon: {
 		marginRight: theme.spacing(2),
 		marginLeft: theme.spacing(2),
@@ -50,15 +61,32 @@ const useStyles = makeStyles((theme) => ({
 	cardContent: {
 		flexGrow: 1,
 	},
+
+	about: {
+		backgroundColor: "rgba(200,140,140,0.6)",
+		padding: theme.spacing(6),
+	},
+	aboutItem: {
+		transition: "all 1s",
+		"&:hover": {
+			backgroundColor: "white",
+			transform: "scale(1.1)",
+			borderRadius: theme.shape.borderRadius,
+		},
+	},
+
 	footer: {
 		backgroundColor: theme.palette.background.paper,
 		padding: theme.spacing(6),
 	},
+	textCen: {
+		textAlign: "center",
+	},
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3, 4, 5, 6];
 
-export default function Album() {
+export default function Index() {
 	const classes = useStyles();
 
 	return (
@@ -66,7 +94,7 @@ export default function Album() {
 			<main>
 				{/* Hero unit */}
 				<div className={classes.heroContent}>
-					<Container maxWidth="md">
+					<Container maxWidth="lg">
 						<Typography
 							component="h1"
 							variant="h2"
@@ -106,6 +134,86 @@ export default function Album() {
 				<Container className={classes.cardGrid} maxWidth="md">
 					{/* End hero unit */}
 					<Grid container spacing={4}>
+						<div
+							style={{ width: "100%" }}
+							className={classes.itemSpace}
+						>
+							<Box display="flex" p={1}>
+								<Typography component="div" variant="body1">
+									<Box textAlign="center" m={1}>
+										Center aligned text.
+									</Box>
+								</Typography>
+								<Box p={3} flexGrow={1}>
+									<Divider />
+								</Box>
+								<Box p={2}>
+									<Typography variant="body1">
+										{" "}
+										item ohen
+									</Typography>
+								</Box>
+							</Box>
+						</div>
+						{cards.map((card) => (
+							<Grid item key={card} xs={12} sm={6} md={4}>
+								<Card className={classes.card}>
+									<CardMedia
+										className={classes.cardMedia}
+										image="https://source.unsplash.com/random"
+										title="Image title"
+									/>
+									<CardContent
+										className={classes.cardContent}
+									>
+										<Typography
+											gutterBottom
+											variant="h5"
+											component="h2"
+										>
+											نام تور
+										</Typography>
+										<Typography>
+											توضیحات تور شش یشسیهاشس یعشسای مهش
+											سیکاش یح شسی شسی شسیشس یشسهیت شسهی
+										</Typography>
+									</CardContent>
+									<CardActions>
+										<Button size="small" color="primary">
+											مشاهده
+										</Button>
+										<Button size="small" color="primary">
+											عضویت
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
+						))}
+					</Grid>
+
+					<Grid container spacing={4}>
+						<div
+							style={{ width: "100%" }}
+							className={classes.itemSpace}
+						>
+							<Box display="flex" p={1}>
+								<Box p={2}>
+									<Typography variant="body1">
+										{" "}
+										item ohen
+									</Typography>
+								</Box>
+								<Box p={3} flexGrow={1}>
+									<Divider />
+								</Box>
+								<Box p={2}>
+									<Typography variant="body1">
+										{" "}
+										item ohen
+									</Typography>
+								</Box>
+							</Box>
+						</div>
 						{cards.map((card) => (
 							<Grid item key={card} xs={12} sm={6} md={4}>
 								<Card className={classes.card}>
@@ -144,6 +252,110 @@ export default function Album() {
 				</Container>
 			</main>
 			{/* Footer */}
+
+			{/* about us */}
+			<div className={classes.about}>
+				<Box m="3">
+					<Typography variant="h3">
+						<Box textAlign="center" className={classes.aboutMargin}>
+							جرا جیجو !!!!!
+						</Box>
+					</Typography>
+				</Box>
+				<Container maxWidth="lg">
+					<Grid container spacing={6} justify="center">
+						<Grid item xs={12} sm={6} md={4}>
+							<Box
+								className={classes.aboutItem}
+								display="flex"
+								flexDirection="column"
+								textAlign="center"
+								p={1}
+							>
+								<Box alignSelf="center">
+									<img
+										src={respect}
+										width="64"
+										alt="respect"
+									/>
+								</Box>
+								<Box p={2}>
+									<Typography variant="h5">
+										{" "}
+										تور طبیعت گردی خاص
+									</Typography>
+								</Box>
+								<Typography variant="body1">
+									<Box p={2} textAlign="justify">
+										تجربه سالیان، به تیم جیجو این امکان را
+										داده است که در تور های طبیعت گردی و تور
+										های خارجی خود، شما را به دیدن شهر ها و
+										مقاصد بکر و خاص در نوروز 99 و تور کوبا و
+										تور ژاپن ببرد
+									</Box>
+								</Typography>
+							</Box>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<Box
+								className={classes.aboutItem}
+								display="flex"
+								flexDirection="column"
+								textAlign="center"
+								p={1}
+							>
+								<Box alignSelf="center">
+									<img src={spec} width="64" alt="respect" />
+								</Box>
+								<Box p={2}>
+									<Typography variant="h5">
+										اعتماد به خدمات تور
+									</Typography>
+								</Box>
+								<Typography variant="body1">
+									<Box p={2} textAlign="justify">
+										جیجو با اجرای متعهدانه، سعی در ارائه
+										خدمات تور طبیعت گردی، تور های مکزیک و
+										تور نپال بر اساس توضیحات سایت را داشته،
+										تلاش خود را میکند تا بهترین تجربه را در
+										تور های نوروز 99 ارائه دهدتور ژاپن ببرد
+									</Box>
+								</Typography>
+							</Box>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<Box
+								className={classes.aboutItem}
+								display="flex"
+								flexDirection="column"
+								textAlign="center"
+								p={1}
+							>
+								<Box alignSelf="center">
+									<img src={safe} width="64" alt="respect" />
+								</Box>
+								<Box p={2}>
+									<Typography variant="h5">
+										{" "}
+										امنیت در تور
+									</Typography>
+								</Box>
+								<Typography variant="body1">
+									<Box p={2} textAlign="justify">
+										از آنجا که جیجو میداند آرامش خاطر در
+										تورهای طبیعت گردی، تور ژاپن، تور نپال و
+										تور کوبا از مهمترین خواسته های مسافران
+										است با ایجاد فضای دوستانه ، خیال شما را
+										از این خاطر در تور راحت کرده ایم
+									</Box>
+								</Typography>
+							</Box>
+						</Grid>
+					</Grid>
+				</Container>
+			</div>
+			{/* End about us */}
+
 			<footer className={classes.footer}>
 				<Typography variant="h6" align="center" gutterBottom>
 					Footer
