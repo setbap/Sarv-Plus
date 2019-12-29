@@ -9,6 +9,7 @@ import { UserInterface, LoginInterface, UserValidateInterface } from './action_i
 import { ThunkDispatch } from 'redux-thunk';
 import { toast } from "react-toastify";
 import { Bsignup, Blogin_user, Bvalidate_user } from '../util/urls';
+import { useCookies } from 'react-cookie'
 
 
 export const signup = (newUser: UserInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
@@ -51,14 +52,15 @@ export const validate_user = (user: UserValidateInterface) => (dispatch: ThunkDi
 
 
 
-export const login = (user: LoginInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+export const login = (user: LoginInterface, setCookie: Function) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+
   axios.post(Blogin_user, user).then(res => {
     dispatch({
       type: LOGIN,
       payload: ""
     })
     history.push("/")
-    toast.success(res.data.token)
+    setCookie("token", res.data.token, { maxAge: 24 * 60 * 60 * 1000 * 7 })
   }).catch(err => {
     console.log(err)
     dispatch({
@@ -66,6 +68,7 @@ export const login = (user: LoginInterface) => (dispatch: ThunkDispatch<{}, unde
       payload: "err in login"
     })
     toast.error("گذرواژه یا ایمیل شما اشتباه میباشد.", { autoClose: 4000 })
+    return ""
 
   })
 }
