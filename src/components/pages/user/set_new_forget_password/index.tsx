@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -12,19 +10,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
 import { useDispatch } from "react-redux";
-import FormLabel from "@material-ui/core/FormLabel";
 import { Link as RLink } from "react-router-dom";
-// import { signup as SGN } from "../../../actions/user_auth";
-import { UserGender } from "../../../../actions/action_interfaces";
-import {
-	Flogin_user,
-	Fvalidate_user,
-	Freset_password_user,
-	Fsignup,
-} from "../../../../util/page_urls";
+import { setResetPassword } from "../../../../actions/user_auth";
+import { Flogin_user } from "../../../../util/page_urls";
 
 function Copyright() {
 	return (
@@ -95,17 +84,13 @@ const SignUp = () => {
 					className={classes.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						// dispatch(
-						// 	SGN({
-						// 		name: "sina",
-						// 		lastname: "ebr",
-						// 		dob: "asdsd",
-						// 		email: "eb@as.com",
-						// 		gender: UserGender.MAN,
-						// 		password: "ad",
-						// 		phoneNumber: 12312313,
-						// 	}),
-						// );
+						dispatch(
+							setResetPassword({
+								email: state.email,
+								newPassword: state.newPassword,
+								token: state.token,
+							}),
+						);
 						console.log(state);
 					}}
 				>
@@ -131,10 +116,10 @@ const SignUp = () => {
 								fullWidth
 								onChange={changeHanlder}
 								value={state.newPassword}
-								name="token"
-								label="کد تایید"
+								name="newPassword"
+								label="رمز عبور جدید"
 								type="password"
-								id="password"
+								id="newPassword"
 								autoComplete="current-password"
 							/>
 						</Grid>
@@ -144,12 +129,11 @@ const SignUp = () => {
 								required
 								fullWidth
 								onChange={changeHanlder}
-								value={state.newPassword}
-								name="newPassword"
-								label=" رمز عبور جدید"
-								type="password"
-								id="password"
-								autoComplete="current-password"
+								value={state.token}
+								name="token"
+								label="کد تایید"
+								id="token"
+								autoComplete="token"
 							/>
 						</Grid>
 					</Grid>
@@ -160,7 +144,7 @@ const SignUp = () => {
 						color="primary"
 						className={classes.submit}
 					>
-						ایجاد حساب
+						تغییر{" "}
 					</Button>
 					<Grid container>
 						<Grid xs={12} item>

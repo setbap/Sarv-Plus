@@ -1,15 +1,14 @@
-import { SIGNUP, LOGIN, SIGNUP_ERR, LOGIN_ERR, VALIDATE, VALIDATE_ERR } from './action_types';
+import { SIGNUP, LOGIN, SIGNUP_ERR, LOGIN_ERR, VALIDATE, VALIDATE_ERR, RESET_PASS, RESET_PASS_ERR, SET_RESET_PASS, SET_RESET_PASS_ERR } from './action_types';
 import axios from "axios";
 import history from "../util/create_history";
-import jwtToken from "jwt-decode";
-import { setTokenToHeader } from "../util/axios_config";
-import { Fsignup, Flogin_user, Freset_password_user, Fset_new_reset_password_user, Fvalidate_user } from '../util/page_urls'
+// import jwtToken from "jwt-decode";
+// import { setTokenToHeader } from "../util/axios_config";
+import { Flogin_user, Fset_new_reset_password_user, Fvalidate_user } from '../util/page_urls'
 // import { Bget_me_user, Bi_want_to_be_tour_leader, Blogin_user, Breset_password_user, Bset_new_reset_password_user, Bsignup, Bvalidate_user } from '../util/urls';
-import { UserInterface, LoginInterface, UserValidateInterface } from './action_interfaces';
+import { UserInterface, LoginInterface, UserValidateInterface, resetPasswordInterface, setNewResetPasswordInterface } from './action_interfaces';
 import { ThunkDispatch } from 'redux-thunk';
 import { toast } from "react-toastify";
-import { Bsignup, Blogin_user, Bvalidate_user } from '../util/urls';
-import { useCookies } from 'react-cookie'
+import { Bsignup, Blogin_user, Bvalidate_user, Breset_password_user, Bset_new_reset_password_user } from '../util/urls';
 
 
 export const signup = (newUser: UserInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
@@ -50,10 +49,7 @@ export const validate_user = (user: UserValidateInterface) => (dispatch: ThunkDi
   })
 }
 
-
-
 export const login = (user: LoginInterface, setCookie: Function) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
-
   axios.post(Blogin_user, user).then(res => {
     dispatch({
       type: LOGIN,
@@ -68,8 +64,44 @@ export const login = (user: LoginInterface, setCookie: Function) => (dispatch: T
       payload: "err in login"
     })
     toast.error("گذرواژه یا ایمیل شما اشتباه میباشد.", { autoClose: 4000 })
-    return ""
 
   })
 }
 
+export const resetPassword = (resetEmail: resetPasswordInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+  axios.post(Breset_password_user, resetEmail).then(res => {
+    dispatch({
+      type: RESET_PASS,
+      payload: ""
+    })
+    history.push(Fset_new_reset_password_user);
+    console.log(res.data);
+    toast.success(res.data.token)
+  }).catch(err => {
+    console.log(err)
+    dispatch({
+      type: RESET_PASS_ERR,
+      payload: "err in login"
+    })
+    toast.error(" ایمیل شما اشتباه میباشد.", { autoClose: 4000 })
+
+  })
+}
+
+export const setResetPassword = (newPass: setNewResetPasswordInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+  axios.post(Bset_new_reset_password_user, newPass).then(res => {
+    dispatch({
+      type: SET_RESET_PASS,
+      payload: ""
+    })
+    history.push(Flogin_user);
+    toast.success("گذرواژه با موفقیت تعغیر داده شده")
+  }).catch(err => {
+    console.log(err)
+    dispatch({
+      type: SET_RESET_PASS_ERR,
+      payload: "err in login"
+    })
+    toast.error(" اطلاعات وارد شده اشتباه میباشد.", { autoClose: 4000 })
+  })
+}

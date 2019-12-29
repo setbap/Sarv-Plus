@@ -1,6 +1,10 @@
 // fonrtend end points
 
 // ------------start user auth --------------//
+export const Findex = "/"
+// ------------end user auth --------------//
+
+// ------------start user auth --------------//
 export const Fsignup = "/user/signup"
 export const Fvalidate_user = "/user/validate_user"
 export const Flogin_user = "/user/login"

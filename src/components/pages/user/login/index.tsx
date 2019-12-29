@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
 	const dispatch = useDispatch();
-	const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+	const [, setCookie] = useCookies(["token"]);
 
 	const [state, setState] = useState({
 		email: "",

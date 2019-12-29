@@ -1,11 +1,13 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import History from "./util/create_history";
 import SignUp from "./components/pages/user/signup";
 import Login from "./components/pages/user/login";
 import ValidateUser from "./components/pages/user/validate_user";
 import ForgetPassword from "./components/pages/user/forget_password";
+import Index from "./components/pages/index/index";
 import ForgetPasswordNewPassword from "./components/pages/user/set_new_forget_password";
+import HeaderBar from "./components/layouts/HeaderBar";
 import "./util/axios_config";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,21 +19,39 @@ import {
 	Fvalidate_user,
 	Freset_password_user,
 	Fset_new_reset_password_user,
+	Findex,
 } from "./util/page_urls";
 
 const App: React.FC = () => {
 	return (
-		<Router history={History}>
-			<Route path={Fsignup} component={SignUp} />
-			<Route path={Flogin_user} component={Login} />
-			<Route path={Fvalidate_user} component={ValidateUser} />
-			<Route path={Freset_password_user} component={ForgetPassword} />
-			<Route
-				path={Fset_new_reset_password_user}
-				component={ForgetPasswordNewPassword}
-			/>
-			<ToastContainer autoClose={1000} />
-		</Router>
+		<>
+			<Router history={History}>
+				<Switch>
+					<HeaderBar />
+				</Switch>
+				<Switch>
+					<Route path={Findex} exact component={Index} />
+					<Route path={Fsignup} exact component={SignUp} />
+					<Route path={Flogin_user} exact component={Login} />
+					<Route
+						path={Fvalidate_user}
+						exact
+						component={ValidateUser}
+					/>
+					<Route
+						exact
+						path={Freset_password_user}
+						component={ForgetPassword}
+					/>
+					<Route
+						exact
+						path={Fset_new_reset_password_user}
+						component={ForgetPasswordNewPassword}
+					/>
+					<ToastContainer autoClose={1000} />
+				</Switch>
+			</Router>
+		</>
 	);
 };
 

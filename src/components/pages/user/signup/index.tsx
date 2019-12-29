@@ -19,7 +19,6 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { Link as RLink } from "react-router-dom";
 import { signup as SGN } from "../../../../actions/user_auth";
 import { UserGender } from "../../../../actions/action_interfaces";
-import { Blogin_user } from "../../../../util/urls";
 import { Flogin_user, Fvalidate_user } from "../../../../util/page_urls";
 
 function Copyright() {
