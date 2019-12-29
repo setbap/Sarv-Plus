@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -12,19 +10,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
 import { useDispatch } from "react-redux";
-import FormLabel from "@material-ui/core/FormLabel";
 import { Link as RLink } from "react-router-dom";
-// import { signup as SGN } from "../../../actions/user_auth";
-import { UserGender } from "../../../../actions/action_interfaces";
-import {
-	Flogin_user,
-	Fvalidate_user,
-	Freset_password_user,
-	Fsignup,
-} from "../../../../util/page_urls";
+import { validate_user } from "../../../../actions/user_auth";
+import { Flogin_user } from "../../../../util/page_urls";
 
 function Copyright() {
 	return (
@@ -65,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
 	const dispatch = useDispatch();
 	const [state, setState] = useState({
-		token: "",
+		validateNumber: "",
+		email: "",
 	});
 
 	const changeHanlder = (
@@ -93,17 +83,12 @@ const SignUp = () => {
 					className={classes.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						// dispatch(
-						// 	SGN({
-						// 		name: "sina",
-						// 		lastname: "ebr",
-						// 		dob: "asdsd",
-						// 		email: "eb@as.com",
-						// 		gender: UserGender.MAN,
-						// 		password: "ad",
-						// 		phoneNumber: 12312313,
-						// 	}),
-						// );
+						dispatch(
+							validate_user({
+								email: state.email,
+								validateNumber: +state.validateNumber,
+							}),
+						);
 						console.log(state);
 					}}
 				>
@@ -115,11 +100,25 @@ const SignUp = () => {
 								type="number"
 								fullWidth
 								onChange={changeHanlder}
-								value={state.token}
+								value={state.validateNumber}
+								id="validateNumber"
+								label="کد تایید خود را وارد کنید"
+								name="validateNumber"
+								autoComplete="validateNumber"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								type="email"
+								fullWidth
+								onChange={changeHanlder}
+								value={state.email}
 								id="email"
-								label="کد تایید ایمیل"
-								name="token"
-								autoComplete="token"
+								label="ایمیل خود را وارد کنید"
+								name="email"
+								autoComplete="email"
 							/>
 						</Grid>
 					</Grid>

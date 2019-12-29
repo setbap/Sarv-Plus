@@ -17,10 +17,8 @@ import Radio from "@material-ui/core/Radio";
 import { useDispatch } from "react-redux";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Link as RLink } from "react-router-dom";
-// import { signup as SGN } from "../../../actions/user_auth";
-import { UserGender } from "../../../../actions/action_interfaces";
+import { login } from "../../../../actions/user_auth";
 import {
-	Flogin_user,
 	Fvalidate_user,
 	Freset_password_user,
 	Fsignup,
@@ -94,17 +92,7 @@ const SignUp = () => {
 					className={classes.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						// dispatch(
-						// 	SGN({
-						// 		name: "sina",
-						// 		lastname: "ebr",
-						// 		dob: "asdsd",
-						// 		email: "eb@as.com",
-						// 		gender: UserGender.MAN,
-						// 		password: "ad",
-						// 		phoneNumber: 12312313,
-						// 	}),
-						// );
+						dispatch(login(state));
 						console.log(state);
 					}}
 				>

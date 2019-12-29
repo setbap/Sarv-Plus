@@ -6,6 +6,9 @@ import Login from "./components/pages/user/login";
 import ValidateUser from "./components/pages/user/validate_user";
 import ForgetPassword from "./components/pages/user/forget_password";
 import ForgetPasswordNewPassword from "./components/pages/user/set_new_forget_password";
+import "./util/axios_config";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import {
@@ -27,6 +30,7 @@ const App: React.FC = () => {
 				path={Fset_new_reset_password_user}
 				component={ForgetPasswordNewPassword}
 			/>
+			<ToastContainer autoClose={1000} />
 		</Router>
 	);
 };

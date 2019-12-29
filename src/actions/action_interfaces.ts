@@ -8,7 +8,7 @@ export interface UserInterface {
   email: string;
   password: string;
   phoneNumber?: number;
-  dob: string;
+  dob: Date;
   gender: UserGender;
 }
 

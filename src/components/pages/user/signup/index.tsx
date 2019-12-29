@@ -17,7 +17,7 @@ import Radio from "@material-ui/core/Radio";
 import { useDispatch } from "react-redux";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Link as RLink } from "react-router-dom";
-// import { signup as SGN } from "../../../actions/user_auth";
+import { signup as SGN } from "../../../../actions/user_auth";
 import { UserGender } from "../../../../actions/action_interfaces";
 import { Blogin_user } from "../../../../util/urls";
 import { Flogin_user, Fvalidate_user } from "../../../../util/page_urls";
@@ -95,17 +95,16 @@ const SignUp = () => {
 					className={classes.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						// dispatch(
-						// 	SGN({
-						// 		name: "sina",
-						// 		lastname: "ebr",
-						// 		dob: "asdsd",
-						// 		email: "eb@as.com",
-						// 		gender: UserGender.MAN,
-						// 		password: "ad",
-						// 		phoneNumber: 12312313,
-						// 	}),
-						// );
+						dispatch(
+							SGN({
+								name: state.name,
+								lastname: state.lastname,
+								dob: state.dob,
+								email: state.email,
+								gender: state.gender,
+								password: state.password,
+							}),
+						);
 						console.log(state);
 					}}
 				>
@@ -163,20 +162,6 @@ const SignUp = () => {
 								type="password"
 								id="password"
 								autoComplete="current-password"
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								autoComplete="phonenumber"
-								name="phoneNumber"
-								variant="outlined"
-								// required
-								type={"number"}
-								fullWidth
-								id="phoneNumber"
-								onChange={changeHanlder}
-								value={state.phoneNumber}
-								label="شماره تلفن"
 							/>
 						</Grid>
 						<Grid item xs={12}>
