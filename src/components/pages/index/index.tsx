@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,9 +12,14 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import Link from "@material-ui/core/Link";
+import { Link as RLink } from "react-router-dom";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import respect from "./image/respect.png";
 import spec from "./image/spec.png";
 import safe from "./image/safe.png";
+import { get_lastest_tours } from "../../../actions/explore_tours";
+import { get_lastest_orgs } from "../../../actions/explore_orgs";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
 	return (
@@ -63,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	about: {
-		backgroundColor: "rgba(200,140,140,0.6)",
+		backgroundColor: theme.palette.secondary.light,
 		padding: theme.spacing(6),
 	},
 	aboutItem: {
@@ -84,11 +90,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const cards = [1, 2, 3, 4, 5, 6];
-
 export default function Index() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const history = useHistory();
 
+	useEffect(() => {
+		dispatch(get_lastest_tours());
+		dispatch(get_lastest_orgs());
+		// eslint-disable-next-line
+	}, []);
+
+	const { tours } = useSelector((state: any) => {
+		if (state.tours.tours) {
+			return state.tours.tours;
+		}
+		return { tours: [] };
+	}, shallowEqual);
+	const { orgs } = useSelector((state: any) => {
+		if (state.orgs.orgs) {
+			return state.orgs.orgs;
+		}
+		return { orgs: [] };
+	}, shallowEqual);
 	return (
 		<React.Fragment>
 			<main>
@@ -139,28 +163,31 @@ export default function Index() {
 							className={classes.itemSpace}
 						>
 							<Box display="flex" p={1}>
-								<Typography component="div" variant="body1">
-									<Box textAlign="center" m={1}>
-										Center aligned text.
-									</Box>
-								</Typography>
+								<Box p={1}>
+									<Typography variant="h6">
+										<Box fontWeight="fontWeightBold">
+											آخرین تور ها
+										</Box>
+									</Typography>
+								</Box>
 								<Box p={3} flexGrow={1}>
 									<Divider />
 								</Box>
-								<Box p={2}>
-									<Typography variant="body1">
-										{" "}
-										item ohen
+								<Box p={1}>
+									<Typography variant="h6">
+										<Box fontWeight="fontWeightBold">
+											<RLink to="/as">بیشتر</RLink>
+										</Box>
 									</Typography>
 								</Box>
 							</Box>
 						</div>
-						{cards.map((card) => (
+						{(tours || []).map((card: any) => (
 							<Grid item key={card} xs={12} sm={6} md={4}>
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia}
-										image="https://source.unsplash.com/random"
+										image={card.image}
 										title="Image title"
 									/>
 									<CardContent
@@ -171,15 +198,29 @@ export default function Index() {
 											variant="h5"
 											component="h2"
 										>
-											نام تور
+											{card.name}
 										</Typography>
 										<Typography>
-											توضیحات تور شش یشسیهاشس یعشسای مهش
-											سیکاش یح شسی شسی شسیشس یشسهیت شسهی
+											<Box> از{card.sourcePlace} </Box>
+											<Box>
+												{" "}
+												به {card.destinationPlace}{" "}
+											</Box>
+											<Box>هزینه {card.price}</Box>
+											<Box>
+												ظرفیت باقی مانده:{" "}
+												{card.remainingCapacity}
+											</Box>
 										</Typography>
 									</CardContent>
 									<CardActions>
-										<Button size="small" color="primary">
+										<Button
+											size="small"
+											color="primary"
+											onClick={() =>
+												history.push(`/tour/${card.id}`)
+											}
+										>
 											مشاهده
 										</Button>
 										<Button size="small" color="primary">
@@ -197,25 +238,27 @@ export default function Index() {
 							className={classes.itemSpace}
 						>
 							<Box display="flex" p={1}>
-								<Box p={2}>
-									<Typography variant="body1">
-										{" "}
-										item ohen
+								<Box p={1}>
+									<Typography variant="h6">
+										<Box fontWeight="fontWeightBold">
+											بهترین سازمان ها
+										</Box>
 									</Typography>
 								</Box>
 								<Box p={3} flexGrow={1}>
 									<Divider />
 								</Box>
-								<Box p={2}>
-									<Typography variant="body1">
-										{" "}
-										item ohen
+								<Box p={1}>
+									<Typography variant="h6">
+										<Box fontWeight="fontWeightBold">
+											<RLink to="/as">بیشتر</RLink>
+										</Box>
 									</Typography>
 								</Box>
 							</Box>
 						</div>
-						{cards.map((card) => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
+						{(orgs || []).map((card: any) => (
+							<Grid item key={card.id} xs={12} sm={6} md={4}>
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia}

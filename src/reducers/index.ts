@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
-import auth from './auth'
+import auth from './auth';
+import orgs from './orgs';
+import tours from './tours';
 export default combineReducers({
-  auth
+  auth, tours, orgs
 })
