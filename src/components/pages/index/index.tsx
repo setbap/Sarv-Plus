@@ -20,6 +20,8 @@ import safe from "./image/safe.png";
 import { get_lastest_tours } from "../../../actions/explore_tours";
 import { get_lastest_orgs } from "../../../actions/explore_orgs";
 import { useHistory } from "react-router-dom";
+import { Cro } from "./Cro";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 function Copyright() {
 	return (
@@ -115,8 +117,11 @@ export default function Index() {
 	}, shallowEqual);
 	return (
 		<React.Fragment>
+			<Cro />
 			<main>
 				{/* Hero unit */}
+
+				<CssBaseline />
 				<div className={classes.heroContent}>
 					<Container maxWidth="lg">
 						<Typography
@@ -183,7 +188,7 @@ export default function Index() {
 							</Box>
 						</div>
 						{(tours || []).map((card: any) => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
+							<Grid item key={card.id} xs={12} sm={6} md={4}>
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia}
@@ -200,7 +205,7 @@ export default function Index() {
 										>
 											{card.name}
 										</Typography>
-										<Typography>
+										<Typography component="div">
 											<Box> از{card.sourcePlace} </Box>
 											<Box>
 												{" "}
@@ -328,7 +333,7 @@ export default function Index() {
 										تور طبیعت گردی خاص
 									</Typography>
 								</Box>
-								<Typography variant="body1">
+								<Typography variant="body1" component="div">
 									<Box p={2} textAlign="justify">
 										تجربه سالیان، به تیم جیجو این امکان را
 										داده است که در تور های طبیعت گردی و تور
@@ -355,7 +360,7 @@ export default function Index() {
 										اعتماد به خدمات تور
 									</Typography>
 								</Box>
-								<Typography variant="body1">
+								<Typography variant="body1" component="div">
 									<Box p={2} textAlign="justify">
 										جیجو با اجرای متعهدانه، سعی در ارائه
 										خدمات تور طبیعت گردی، تور های مکزیک و
@@ -383,7 +388,7 @@ export default function Index() {
 										امنیت در تور
 									</Typography>
 								</Box>
-								<Typography variant="body1">
+								<Typography variant="body1" component="div">
 									<Box p={2} textAlign="justify">
 										از آنجا که جیجو میداند آرامش خاطر در
 										تورهای طبیعت گردی، تور ژاپن، تور نپال و
