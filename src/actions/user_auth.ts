@@ -1,4 +1,4 @@
-import { SIGNUP, LOGIN, SIGNUP_ERR, LOGIN_ERR, VALIDATE, VALIDATE_ERR, RESET_PASS, RESET_PASS_ERR, SET_RESET_PASS, SET_RESET_PASS_ERR } from './action_types';
+import { SIGNUP, LOGIN, SIGNUP_ERR, LOGIN_ERR, VALIDATE, VALIDATE_ERR, RESET_PASS, RESET_PASS_ERR, SET_RESET_PASS, SET_RESET_PASS_ERR, SET_HEADER } from './action_types';
 import axios from "axios";
 import history from "../util/create_history";
 // import jwtToken from "jwt-decode";
@@ -9,6 +9,14 @@ import { UserInterface, LoginInterface, UserValidateInterface, resetPasswordInte
 import { ThunkDispatch } from 'redux-thunk';
 import { toast } from "react-toastify";
 import { Bsignup, Blogin_user, Bvalidate_user, Breset_password_user, Bset_new_reset_password_user } from '../util/urls';
+
+
+export const headerName = (name: string) => {
+  return ({
+    type: SET_HEADER,
+    payload: name
+  })
+}
 
 
 export const signup = (newUser: UserInterface) => (dispatch: ThunkDispatch<{}, undefined, any>) => {

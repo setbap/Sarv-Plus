@@ -1,7 +1,7 @@
 import { ThunkDispatch } from "redux-thunk"
 import axios from 'axios'
-import { GET_LASTEST_TOUR, LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_TOUR } from "./action_types"
-import { Blastest_tours } from "../util/urls"
+import { GET_LASTEST_TOUR, LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_ORGS } from "./action_types"
+import { Blastest_tours, Bbest_orgs } from "../util/urls"
 
 
 
@@ -10,7 +10,7 @@ export const get_lastest_tours = () => (dispatch: ThunkDispatch<{}, undefined, a
   dispatch({
     type: LOADING_GET_LASTEST_TOUR
   })
-  axios.post(Blastest_tours).then(res => {
+  axios.post(Blastest_tours, { isTwelve: false, }).then(res => {
     dispatch({
       type: CLEAR_LOADING_GET_LASTEST_TOUR,
     })
@@ -22,6 +22,53 @@ export const get_lastest_tours = () => (dispatch: ThunkDispatch<{}, undefined, a
     console.log(err)
     dispatch({
       type: CLEAR_LOADING_GET_LASTEST_TOUR,
+    })
+
+  })
+}
+export const get_lastest_tours_with_page = (page: number) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+  dispatch({
+    type: LOADING_GET_LASTEST_TOUR
+  })
+  axios.post(Blastest_tours, {
+    isTwelve: true,
+    pageNumber: page
+  }).then(res => {
+    dispatch({
+      type: CLEAR_LOADING_GET_LASTEST_TOUR,
+    })
+    dispatch({
+      type: GET_LASTEST_TOUR,
+      payload: res.data
+    })
+  }).catch(err => {
+    console.log(err)
+    dispatch({
+      type: CLEAR_LOADING_GET_LASTEST_TOUR,
+    })
+
+  })
+}
+
+export const get_lastest_orgs_with_page = (page: number) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+  dispatch({
+    type: LOADING_GET_LASTEST_TOUR
+  })
+  axios.post(Bbest_orgs, {
+    isTwelve: true,
+    pageNumber: page
+  }).then(res => {
+    dispatch({
+      type: CLEAR_LOADING_GET_LASTEST_ORGS,
+    })
+    dispatch({
+      type: GET_LASTEST_TOUR,
+      payload: res.data
+    })
+  }).catch(err => {
+    console.log(err)
+    dispatch({
+      type: CLEAR_LOADING_GET_LASTEST_ORGS,
     })
 
   })

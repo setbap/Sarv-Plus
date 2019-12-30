@@ -1,8 +1,13 @@
 // fonrtend end points
 
-// ------------start user auth --------------//
+// ------------start apps --------------//
 export const Findex = "/"
-// ------------end user auth --------------//
+export const Ftours = "/tours"
+export const Ftours_page = "/tours/:page"
+export const Forgs = "/orgs"
+export const Forgs_page = "/orgs/:page"
+
+// ------------end apps --------------//
 
 // ------------start user auth --------------//
 export const Fsignup = "/user/signup"

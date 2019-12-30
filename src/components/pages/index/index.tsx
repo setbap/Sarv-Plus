@@ -11,7 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
-import Link from "@material-ui/core/Link";
 import { Link as RLink } from "react-router-dom";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import respect from "./image/respect.png";
@@ -22,19 +21,9 @@ import { get_lastest_orgs } from "../../../actions/explore_orgs";
 import { useHistory } from "react-router-dom";
 import { Cro } from "./Cro";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
-function Copyright() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{"Copyright © "}
-			<Link color="inherit" href="https://material-ui.com/">
-				Your Website
-			</Link>{" "}
-			{new Date().getFullYear()}
-			{"."}
-		</Typography>
-	);
-}
+import Footer from "../../layouts/Footer";
+import { Forgs, Ftours } from "../../../util/page_urls";
+import { headerName } from "../../../actions/user_auth";
 
 const useStyles = makeStyles((theme) => ({
 	itemSpace: {
@@ -82,11 +71,6 @@ const useStyles = makeStyles((theme) => ({
 			borderRadius: theme.shape.borderRadius,
 		},
 	},
-
-	footer: {
-		backgroundColor: theme.palette.background.paper,
-		padding: theme.spacing(6),
-	},
 	textCen: {
 		textAlign: "center",
 	},
@@ -100,6 +84,8 @@ export default function Index() {
 	useEffect(() => {
 		dispatch(get_lastest_tours());
 		dispatch(get_lastest_orgs());
+		dispatch(headerName("جیجو"));
+
 		// eslint-disable-next-line
 	}, []);
 
@@ -181,7 +167,7 @@ export default function Index() {
 								<Box p={1}>
 									<Typography variant="h6">
 										<Box fontWeight="fontWeightBold">
-											<RLink to="/as">بیشتر</RLink>
+											<RLink to={Ftours}>بیشتر</RLink>
 										</Box>
 									</Typography>
 								</Box>
@@ -256,7 +242,7 @@ export default function Index() {
 								<Box p={1}>
 									<Typography variant="h6">
 										<Box fontWeight="fontWeightBold">
-											<RLink to="/as">بیشتر</RLink>
+											<RLink to={Forgs}>بیشتر</RLink>
 										</Box>
 									</Typography>
 								</Box>
@@ -404,20 +390,7 @@ export default function Index() {
 			</div>
 			{/* End about us */}
 
-			<footer className={classes.footer}>
-				<Typography variant="h6" align="center" gutterBottom>
-					Footer
-				</Typography>
-				<Typography
-					variant="subtitle1"
-					align="center"
-					color="textSecondary"
-					component="p"
-				>
-					Something here to give the footer a purpose!
-				</Typography>
-				<Copyright />
-			</footer>
+			<Footer />
 			{/* End footer */}
 		</React.Fragment>
 	);

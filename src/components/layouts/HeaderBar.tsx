@@ -16,6 +16,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const HeaderBar: React.FC = () => {
+	const { header } = useSelector((st: any) => st.page);
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -115,7 +117,7 @@ const HeaderBar: React.FC = () => {
 							variant="outlined"
 							onClick={() => history.push(Findex)}
 						>
-							مین
+							{header}
 						</Button>
 					</Typography>
 

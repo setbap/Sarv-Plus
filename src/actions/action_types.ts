@@ -13,6 +13,8 @@ export const SET_RESET_PASS_ERR = "SET_RESET_PASS_ERR"
 export const LOGIN = "LOGIN"
 export const LOGIN_ERR = "LOGIN_ERR"
 
+export const SET_HEADER = "SET_HEADER"
+
 
 export const GET_LASTEST_TOUR = "GET_LASTEST_TOUR"
 export const LOADING_GET_LASTEST_TOUR = "LOADING_GET_LASTEST_TOUR"

@@ -1,17 +1,14 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
 
 import { makeStyles } from "@material-ui/core/styles";
 import one from "./image/one.jpg";
 import two from "./image/two.jpg";
 import three from "./image/three.jpg";
-import four from "./image/four.jpg";
+// import four from "./image/four.jpg";
 
 // @ts-ignore
 import Carousel from "re-carousel";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
