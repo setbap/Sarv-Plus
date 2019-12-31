@@ -1,7 +1,7 @@
 import { GET_LASTEST_TOUR, LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_TOUR } from "../actions/action_types";
 
 const initialState = {
-  toues: [],
+  tours: [],
   tour: {},
   loading: false
 }

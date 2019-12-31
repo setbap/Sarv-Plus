@@ -7,6 +7,7 @@ import ValidateUser from "./components/pages/user/validate_user";
 import ForgetPassword from "./components/pages/user/forget_password";
 import Index from "./components/pages/index/index";
 import Tours from "./components/pages/tours/index";
+import Orgs from "./components/pages/orgs/index";
 import ForgetPasswordNewPassword from "./components/pages/user/set_new_forget_password";
 import HeaderBar from "./components/layouts/HeaderBar";
 import "./util/axios_config";
@@ -24,6 +25,7 @@ import {
 	Ftours,
 	Forgs,
 	Ftours_page,
+	Forgs_page,
 } from "./util/page_urls";
 
 const App: React.FC = () => {
@@ -37,6 +39,7 @@ const App: React.FC = () => {
 					<Redirect exact from={Ftours} to={Ftours + "/1"} />
 					<Redirect exact from={Forgs} to={Forgs + "/1"} />
 					<Route path={Ftours_page} exact component={Tours} />
+					<Route path={Forgs_page} exact component={Orgs} />
 					<Route path={Findex} exact component={Index} />
 					<Route path={Fsignup} exact component={SignUp} />
 					<Route path={Flogin_user} exact component={Login} />

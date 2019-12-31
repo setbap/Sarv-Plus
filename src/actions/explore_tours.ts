@@ -1,6 +1,6 @@
 import { ThunkDispatch } from "redux-thunk"
 import axios from 'axios'
-import { GET_LASTEST_TOUR, LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_ORGS } from "./action_types"
+import { GET_LASTEST_TOUR, LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_TOUR, CLEAR_LOADING_GET_LASTEST_ORGS, LOADING_GET_LASTEST_ORGS, GET_LASTEST_ORGS } from "./action_types"
 import { Blastest_tours, Bbest_orgs } from "../util/urls"
 
 
@@ -52,7 +52,7 @@ export const get_lastest_tours_with_page = (page: number) => (dispatch: ThunkDis
 
 export const get_lastest_orgs_with_page = (page: number) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
   dispatch({
-    type: LOADING_GET_LASTEST_TOUR
+    type: LOADING_GET_LASTEST_ORGS
   })
   axios.post(Bbest_orgs, {
     isTwelve: true,
@@ -62,7 +62,7 @@ export const get_lastest_orgs_with_page = (page: number) => (dispatch: ThunkDisp
       type: CLEAR_LOADING_GET_LASTEST_ORGS,
     })
     dispatch({
-      type: GET_LASTEST_TOUR,
+      type: GET_LASTEST_ORGS,
       payload: res.data
     })
   }).catch(err => {
