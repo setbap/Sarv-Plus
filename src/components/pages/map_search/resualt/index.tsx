@@ -17,6 +17,7 @@ import Pagination from "material-ui-flat-pagination/lib/Pagination";
 import {Ftours} from "../../../../util/page_urls";
 import Footer from "../../../layouts/Footer";
 import {makeStyles} from "@material-ui/core";
+import Map from "./show_tours_map";
 
 
 function useQuery() {
@@ -96,14 +97,9 @@ const SearchResault = () => {
         console.log("data", data);
         dispatch(map_search_in_tours(data))
     }, [query.toString()]);
-    // useEffect(() => {
-    //     const data: any = {};
-    //     query.forEach((a, b) => {
-    //         data[b] = a;
-    //     });
-    //     console.log("data2", data);
-    //     dispatch(full_search_in_tours(data))
-    // }, []);
+
+    // @ts-ignore
+    // @ts-ignore
     return (
         <React.Fragment>
             <main className={classes.fullpage}>
@@ -147,6 +143,29 @@ const SearchResault = () => {
                         </div>
                     </Container>
                 </div>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <h1>
+                        {
+                            query ? (
+                                <>
+                                    {console.log("oooo", query.toString())}
+                                    <Map
+                                        radius={(query && query.get("distant")) || 1}
+                                        lng={(query && query.get("lng")) || 1}
+                                        lat={(query && query.get("lat")) || 1}
+                                        markersData={((!loading && tours && tours.tours) || []).map((items: any) => {
+                                            return {
+                                                lng: items.sourceGeo.coordinates[0],
+                                                lat: items.sourceGeo.coordinates[1],
+                                            }
+                                        })}/>
+                                </>
+                            ) : <></>
+                        }
+
+                    </h1>
+
+                </Container>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>

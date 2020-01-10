@@ -11,8 +11,8 @@ const Map = ({markersData, adder}: { markersData: any, adder: any }) => {
     const mapRef = useRef<any>(null);
     useEffect(() => {
         mapRef.current = L.map("map", {
-            center: [49.8419, 24.0315],
-            zoom: 16,
+            center: [36.61, 52.27],
+            zoom: 10,
             layers: [
                 L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
                     attribution:
