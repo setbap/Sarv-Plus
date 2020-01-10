@@ -8,7 +8,7 @@ import {
     LOADING_GET_LASTEST_ORGS,
     GET_LASTEST_ORGS
 } from "./action_types"
-import {Blastest_tours, Bbest_orgs, Bfull_search} from "../util/urls"
+import {Blastest_tours, Bbest_orgs, Bfull_search, Bdistant_search} from "../util/urls"
 
 
 export const get_lastest_tours = () => (dispatch: ThunkDispatch<{}, undefined, any>) => {
@@ -61,6 +61,32 @@ export const full_search_in_tours = (data: any) => (dispatch: ThunkDispatch<{}, 
         type: LOADING_GET_LASTEST_TOUR
     });
     axios.post(Bfull_search, {
+        isTwelve: true,
+        pageNumber: +data.page ? +data.page : 1,
+        ...data
+    }).then(res => {
+        dispatch({
+            type: CLEAR_LOADING_GET_LASTEST_TOUR,
+        });
+        dispatch({
+            type: GET_LASTEST_TOUR,
+            payload: res.data
+        })
+    }).catch(err => {
+        console.log(err);
+        dispatch({
+            type: CLEAR_LOADING_GET_LASTEST_TOUR,
+        })
+
+    })
+};
+
+
+export const map_search_in_tours = (data: any) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+    dispatch({
+        type: LOADING_GET_LASTEST_TOUR
+    });
+    axios.post(Bdistant_search, {
         isTwelve: true,
         pageNumber: +data.page ? +data.page : 1,
         ...data

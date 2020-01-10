@@ -10,10 +10,11 @@ export const Forgs_page = "/orgs/:page";
 // ------------end apps --------------//
 
 
-
 // ------------start search --------------//
-export  const  FsearchIndex = "/search";
-export  const  FsearchResault= "/search/resault";
+export const FsearchIndex = "/search";
+export const FsearchResault = "/search/resault";
+export const FmapSearchIndex = "/map_search";
+export const FmapSearchResault = "/map_search/resault";
 // ------------end search --------------//
 
 

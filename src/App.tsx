@@ -9,6 +9,8 @@ import Index from "./components/pages/index/index";
 import Tours from "./components/pages/tours/index";
 import Search from "./components/pages/search/index";
 import SearchResault from "./components/pages/search/resualt/index";
+import MapSearch from "./components/pages/map_search/index";
+import MapSearchResault from "./components/pages/map_search/resualt/index";
 import Orgs from "./components/pages/orgs/index";
 import ForgetPasswordNewPassword from "./components/pages/user/set_new_forget_password";
 import HeaderBar from "./components/layouts/HeaderBar";
@@ -27,7 +29,7 @@ import {
     Ftours,
     Forgs,
     Ftours_page,
-    Forgs_page, FsearchIndex, FsearchResault,
+    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault,
 } from "./util/page_urls";
 
 const App: React.FC = () => {
@@ -45,6 +47,8 @@ const App: React.FC = () => {
                     <Route path={Findex} exact component={Index}/>
                     <Route path={FsearchIndex} exact component={Search}/>
                     <Route path={FsearchResault} exact component={SearchResault}/>
+                    <Route path={FmapSearchIndex} exact component={MapSearch}/>
+                    <Route path={FmapSearchResault} exact component={MapSearchResault}/>
                     <Route path={Fsignup} exact component={SignUp}/>
                     <Route path={Flogin_user} exact component={Login}/>
                     <Route
