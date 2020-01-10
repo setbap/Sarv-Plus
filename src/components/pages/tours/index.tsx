@@ -23,6 +23,7 @@ import { Ftours_page, Ftours } from "../../../util/page_urls";
 const useStyles = makeStyles((theme) => ({
 	fullpage: {
 		minHeight: "100vh",
+
 	},
 	itemSpace: {
 		marginTop: theme.spacing(2),
