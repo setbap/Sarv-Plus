@@ -47,7 +47,7 @@ const Map = ({markersData, radius, lat, lng}: { markersData: any, radius: any, l
             radius: radius
         }).addTo(layerRef.current);
         markersData.forEach((marker: any) => {
-            L.marker(marker, {title: " marker.title"}).bindPopup('This is Tutorialspoint').openPopup().addTo(layerRef.current);
+            L.marker(marker, {title: marker.title}).bindPopup(marker.title).openPopup().addTo(layerRef.current);
         });
     }, [markersData]);
 

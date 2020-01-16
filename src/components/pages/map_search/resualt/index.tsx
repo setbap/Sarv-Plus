@@ -157,6 +157,7 @@ const SearchResault = () => {
                                             return {
                                                 lng: items.sourceGeo.coordinates[0],
                                                 lat: items.sourceGeo.coordinates[1],
+                                                title: items.name
                                             }
                                         })}/>
                                 </>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Router, Route, Switch, Redirect} from "react-router-dom";
 import History from "./util/create_history";
 import SignUp from "./components/pages/user/signup";
 import Login from "./components/pages/user/login";
+import Info from "./components/pages/user/info";
 import ValidateUser from "./components/pages/user/validate_user";
 import ForgetPassword from "./components/pages/user/forget_password";
 import Index from "./components/pages/index/index";
@@ -29,10 +30,17 @@ import {
     Ftours,
     Forgs,
     Ftours_page,
-    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault,
+    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault, Finfo_user,
 } from "./util/page_urls";
+import {useCookies} from "react-cookie";
+import {useDispatch} from "react-redux";
+import {LOGIN} from "./actions/action_types";
+import {setTokenToHeader} from "./util/axios_config";
 
 const App: React.FC = () => {
+    const [cookies,] = useCookies(["jwtToken"]);
+    setTokenToHeader(cookies.jwtToken ? cookies.jwtToken : "");
+
     return (
         <>
             <Router history={History}>
@@ -51,6 +59,7 @@ const App: React.FC = () => {
                     <Route path={FmapSearchResault} exact component={MapSearchResault}/>
                     <Route path={Fsignup} exact component={SignUp}/>
                     <Route path={Flogin_user} exact component={Login}/>
+                    <Route path={Finfo_user} exact component={Info}/>
                     <Route
                         path={Fvalidate_user}
                         exact
@@ -66,8 +75,8 @@ const App: React.FC = () => {
                         path={Fset_new_reset_password_user}
                         component={ForgetPasswordNewPassword}
                     />
-                    <ToastContainer autoClose={1000}/>
                 </Switch>
+                <ToastContainer position="top-right" autoClose={1000}/>
             </Router>
         </>
     );
