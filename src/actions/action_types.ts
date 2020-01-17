@@ -10,6 +10,13 @@ export const RESET_PASS_ERR = "RESET_PASS_ERR";
 export const SET_RESET_PASS = "SET_RESET_PASS";
 export const SET_RESET_PASS_ERR = "SET_RESET_PASS_ERR";
 
+
+export const SET_UPDATE_INFO = "SET_UPDATE_INFO";
+export const SET_UPDATE_PROF_PIC = "SET_UPDATE_PROF_PIC";
+export const SET_UPDATE_PASSWORD = "SET_UPDATE_PASSWORD";
+
+
+
 export const LOGIN = "LOGIN";
 export const LOGIN_ERR = "LOGIN_ERR";
 

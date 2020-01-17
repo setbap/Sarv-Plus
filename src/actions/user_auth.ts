@@ -9,7 +9,7 @@ import {
     RESET_PASS_ERR,
     SET_RESET_PASS,
     SET_RESET_PASS_ERR,
-    SET_HEADER, GET_USER_INFO
+    SET_HEADER, GET_USER_INFO, SET_UPDATE_INFO, SET_UPDATE_PASSWORD
 } from './action_types';
 import axios from "axios";
 import history from "../util/create_history";
@@ -32,7 +32,7 @@ import {
     Bvalidate_user,
     Breset_password_user,
     Bset_new_reset_password_user,
-    Bget_me_user
+    Bget_me_user, Bset_update_me, Bchange_password
 } from '../util/urls';
 
 
@@ -149,5 +149,39 @@ export const getInfo = () => (dispatch: ThunkDispatch<{}, undefined, any>) => {
     }).catch(err => {
         console.log(err);
         toast.error("خطا در دریافت اطلاعات", {autoClose: 4000})
+    })
+};
+
+export const setNewInfo = (info: any) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+    axios.post(Bset_update_me, info).then(res => {
+        dispatch({
+            type: SET_UPDATE_INFO,
+            payload: ""
+        });
+        toast.success("اطلاعات اصلاح شد.")
+    }).catch(err => {
+        console.log(err);
+        dispatch({
+            type: SET_UPDATE_INFO,
+            payload: ""
+        });
+        toast.error(" خطا در اصلاح اطلاعات.", {autoClose: 4000})
+    })
+};
+
+export const setNewPass = (passes: any) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+    axios.post(Bchange_password, passes).then(res => {
+        dispatch({
+            type: SET_UPDATE_PASSWORD,
+            payload: ""
+        });
+        toast.success("گذزواژه تغییر یافت.")
+    }).catch(err => {
+        console.log(err);
+        dispatch({
+            type: SET_UPDATE_PASSWORD,
+            payload: ""
+        });
+        toast.error(" خطا در تغییر گذرواژه.", {autoClose: 4000})
     })
 };

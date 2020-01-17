@@ -23,7 +23,6 @@ const authState: any = (state: init = initialState as init, action: actionI) => 
     switch (action.type) {
         case LOGIN:
             setTokenToHeader(action.payload);
-            console.log(action.payload);
             return state;
         case GET_USER_INFO:
             return {
