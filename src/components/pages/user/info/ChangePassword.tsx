@@ -22,7 +22,7 @@ export const ChangePassword = () => {
     const dispatch = useDispatch();
     const {user} = useSelector(((state: any) => state.auth));
     const [state, setState] = useState({
-        newPassword : "",
+        newPassword: "",
         oldPassword: ""
     });
 
@@ -54,17 +54,18 @@ export const ChangePassword = () => {
                     <Grid item xs={12} md={6}>
                         <TextField
                             fullWidth
-                            // type={"password"}
+                            type={"password"}
                             margin="normal"
-                            label={"گذروازه حاضر"} value={state.oldPassword} className={classes.mp}
+                            label={"گذروازه حاضر"} value={state.oldPassword || ''} className={classes.mp}
                             onChange={changeHandler}
                             variant={"outlined"} required name={"oldPassword"}/>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField
                             fullWidth
+                            type={"password"}
                             required
-                            label={"گذروازه جدید"} value={state.newPassword} className={classes.mp}
+                            label={"گذروازه جدید"} value={state.newPassword || ''} className={classes.mp}
                             onChange={changeHandler}
                             variant={"outlined"} name={"newPassword"}/>
                     </Grid>

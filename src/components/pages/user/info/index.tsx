@@ -61,6 +61,9 @@ const Index = () => {
 
     return (
         <Container maxWidth={"lg"} className={classes.container}>
+            <Typography component="h1" className={classes.paper} variant="h4" color="textPrimary" align={"center"}  gutterBottom>
+                سوابق و اطلاعات شخصی
+            </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
@@ -70,6 +73,16 @@ const Index = () => {
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         <ChangePassword/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Paper className={classes.paper}>
+                        <Orders/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Paper className={classes.paper}>
+                        <Orders/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>

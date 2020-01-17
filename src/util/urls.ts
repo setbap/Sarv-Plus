@@ -32,6 +32,6 @@ export const Bsingle_tours = "/explore_tours/tours/";
 export const Bbest_orgs = "/explore_orgs/best_orgs";
 export const Bcomment_org = "/explore_orgs/comment_org";
 export const Brate_org = "/explore_orgs/rate_org";
-export const Bsingle_org = "/explore_orgs/orgs/3";
+export const Bsingle_org = "/explore_orgs/orgs/";
 
 // ------------end explore tours --------------//

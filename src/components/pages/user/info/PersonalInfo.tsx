@@ -23,10 +23,10 @@ export const PersonalInfo = () => {
     const {user} = useSelector(((state: any) => state.auth));
     const [state, setState] = useState({
         name: "",
-        lastname: "",
-        email: "",
+        lastname: " ",
+        email: " ",
         gender: "MAN",
-        dob: "",
+
     });
 
     useEffect(() => {
@@ -65,14 +65,14 @@ export const PersonalInfo = () => {
                         <TextField
                             fullWidth
                             margin="normal"
-                            label={"نام"} value={state.name} className={classes.mp} onChange={changeHandler}
+                            label={"نام"} value={state.name || ''} className={classes.mp} onChange={changeHandler}
                             variant={"outlined"} required name={"name"}/>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField
                             fullWidth
                             required
-                            label={"نام خانوادگی"} value={state.lastname} className={classes.mp}
+                            label={"نام خانوادگی"} value={state.lastname || ''} className={classes.mp}
                             onChange={changeHandler}
                             variant={"outlined"} name={"lastname"}/>
                     </Grid>
@@ -83,13 +83,13 @@ export const PersonalInfo = () => {
                                 native
                                 fullWidth
                                 name={"gender"}
-                                value={state.gender}
+                                value={state.gender || 'MAN'}
                                 onChange={(e) => selectChangeHandler("gender", e)}
                                 inputProps={{
                                     name: 'gender',
                                 }}
                             >
-                                <option value={"MAN>"}>مرد</option>
+                                <option value={"MAN"}>مرد</option>
                                 <option value={"WOMAN"}>زن</option>
                             </Select>
                         </FormControl>
@@ -98,7 +98,7 @@ export const PersonalInfo = () => {
                         <TextField
                             disabled
                             fullWidth
-                            label={"نام"} value={state.email} className={classes.mp}
+                            label={"نام"} value={state.email || ''} className={classes.mp}
                             variant={"outlined"} required name={"email"}/>
                     </Grid>
                     <Grid item xs={12}>

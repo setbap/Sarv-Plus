@@ -13,6 +13,7 @@ import SearchResault from "./components/pages/search/resualt/index";
 import MapSearch from "./components/pages/map_search/index";
 import MapSearchResault from "./components/pages/map_search/resualt/index";
 import Orgs from "./components/pages/orgs/index";
+import Org from "./components/pages/org/index";
 import ForgetPasswordNewPassword from "./components/pages/user/set_new_forget_password";
 import HeaderBar from "./components/layouts/HeaderBar";
 import "./util/axios_config";
@@ -30,7 +31,7 @@ import {
     Ftours,
     Forgs,
     Ftours_page,
-    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault, Finfo_user,
+    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault, Finfo_user, Forg_page,
 } from "./util/page_urls";
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
@@ -52,6 +53,7 @@ const App: React.FC = () => {
                     <Redirect exact from={Forgs} to={Forgs + "/1"}/>
                     <Route path={Ftours_page} exact component={Tours}/>
                     <Route path={Forgs_page} exact component={Orgs}/>
+                    <Route path={Forg_page} exact component={Org}/>
                     <Route path={Findex} exact component={Index}/>
                     <Route path={FsearchIndex} exact component={Search}/>
                     <Route path={FsearchResault} exact component={SearchResault}/>

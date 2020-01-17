@@ -5,7 +5,11 @@ export const Findex = "/";
 export const Ftours = "/tours";
 export const Ftours_page = "/tours/:page";
 export const Forgs = "/orgs";
+export const Ftour = "/tour";
 export const Forgs_page = "/orgs/:page";
+export const Forg_page = "/org/:id";
+export const Ftour_page = "/tour/:id";
+
 
 // ------------end apps --------------//
 
