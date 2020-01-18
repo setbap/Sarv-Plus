@@ -1,42 +1,32 @@
 export const SIGNUP = "SIGNUP";
 export const SIGNUP_ERR = "SIGNUP_ERR";
-
 export const VALIDATE = "VALIDATE";
 export const VALIDATE_ERR = "VALIDATE_ERR";
-
 export const RESET_PASS = "RESET_PASS";
 export const RESET_PASS_ERR = "RESET_PASS_ERR";
-
 export const SET_RESET_PASS = "SET_RESET_PASS";
 export const SET_RESET_PASS_ERR = "SET_RESET_PASS_ERR";
-
-
 export const SET_UPDATE_INFO = "SET_UPDATE_INFO";
 export const SET_UPDATE_PROF_PIC = "SET_UPDATE_PROF_PIC";
 export const SET_UPDATE_PASSWORD = "SET_UPDATE_PASSWORD";
-
-
 export const LOGIN = "LOGIN";
 export const LOGIN_ERR = "LOGIN_ERR";
-
 export const OUT_USER = "OUT_USER";
 export const GET_USER_INFO = "GET_USER_INFO";
-
-
 export const SET_HEADER = "SET_HEADER";
-
-
 export const GET_LASTEST_TOUR = "GET_LASTEST_TOUR";
 export const LOADING_GET_LASTEST_TOUR = "LOADING_GET_LASTEST_TOUR";
 export const CLEAR_LOADING_GET_LASTEST_TOUR = "CLEAR_LOADING_GET_LASTEST_TOUR";
-
+export const RATE_TOUR = "RATE_TOUR";
+export const ERR_RATE_TOUR = "ERR_RATE_TOUR";
+export const COMMENT_TOUR = "COMMENT_TOUR";
+export const ERR_COMMENT_TOUR = "ERR_COMMENT_TOUR";
+export const GET_TOUR = "GET_TOUR";
 export const RATE_ORG = "RATE_ORG";
 export const ERR_RATE_ORG = "ERR_RATE_ORG";
 export const COMMENT_ORG = "COMMENT_ORG";
 export const ERR_COMMENT_ORG = "ERR_COMMENT_ORG";
-
-
+export const GET_ORG = "GET_ORG";
 export const GET_LASTEST_ORGS = "GET_LASTEST_ORGS";
 export const LOADING_GET_LASTEST_ORGS = "LOADING_GET_LASTEST_ORGS";
 export const CLEAR_LOADING_GET_LASTEST_ORGS = "CLEAR_LOADING_GET_LASTEST_ORGS";
-export const GET_ORG = "GET_ORG";

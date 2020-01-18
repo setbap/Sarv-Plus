@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {get_single_org, post_org_rate, post_org_comment} from "../../../actions/explore_orgs";
+import {get_single_tour, post_tour_rate, post_tour_comment} from "../../../actions/explore_tours";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -8,21 +8,13 @@ import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
 import {useParams, useHistory} from "react-router-dom";
 import Box from "@material-ui/core/Box";
-import GridList from '@material-ui/core/GridList';
-import Tooltip from '@material-ui/core/Tooltip';
-import Avatar from '@material-ui/core/Avatar';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
+import Map from './map_wrapper'
 import Button from '@material-ui/core/Button';
-import InfoIcon from '@material-ui/icons/Info';
-import {Ftour} from "../../../util/page_urls";
 import Rating from '@material-ui/lab/Rating';
 import {useLoggend} from "../../../util/isLogged";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import theme from "../../../theme";
 import Footer from "../../layouts/Footer";
+import {Simulate} from "react-dom/test-utils";
 
 
 const Title = (props: any) => {
@@ -96,15 +88,15 @@ const Index = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     useEffect(() => {
-        dispatch(get_single_org(id as string))
+        dispatch(get_single_tour(id as string))
     }, [id]);
 
-    const {org, loading} = useSelector(((state: any) => state.orgs));
+    const {tour, loading} = useSelector(((state: any) => state.tours));
     const handleClick = () => {
-        dispatch(post_org_rate(rate, id as string))
+        dispatch(post_tour_rate(rate, id as string))
     };
     const handleClickComment = () => {
-        dispatch(post_org_comment(text, id as string))
+        dispatch(post_tour_comment(text, id as string))
     };
 
     return (
@@ -113,21 +105,21 @@ const Index = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                         <Paper variant={"outlined"} className={classes.paper}>
-                            <img alt={"عکس تور"} src={org?.image}
+                            <img alt={"عکس تور"} src={tour?.image}
                                  style={{objectFit: "cover", height: 300, cursor: "pointer"}}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Paper className={classes.paper}>
-                            <Title>سازمان {org?.name} </Title>
+                            <Title>تور {tour?.name} </Title>
                             <Grid style={{marginTop: "16px"}} container spacing={6}>
                                 <Grid item xs={6}>
                                     <Box display={"flex"} justifyContent={"center"}>
                                         <Typography color={"textPrimary"} variant={"h6"} align={"center"}>
-                                            تعداد تور ها:
+                                            ظرفیت تور:
                                         </Typography>
                                         <Typography color={"primary"} variant={"h6"} align={"center"}>
-                                            {org?.tourCount}
+                                            {tour?.tourCapacity}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -139,7 +131,7 @@ const Index = () => {
                                         {/*<Typography color={"primary"} variant={"h6"} align={"center"}>*/}
                                         {/*    {org?.rateAvg}*/}
                                         {/*</Typography>*/}
-                                        <Rating name="read-only" value={org?.rateAvg} readOnly/>
+                                        <Rating name="read-only" value={tour?.rateAvg} readOnly/>
 
                                     </Box>
                                 </Grid>
@@ -149,7 +141,7 @@ const Index = () => {
                                             تعداد نظرات:
                                         </Typography>
                                         <Typography color={"primary"} variant={"h6"} align={"center"}>
-                                            {org?.commnetCount}
+                                            {tour?.commnetCount}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -159,7 +151,27 @@ const Index = () => {
                                             تعداد رای:
                                         </Typography>
                                         <Typography color={"primary"} variant={"h6"} align={"center"}>
-                                            {org?.rateCount}
+                                            {tour?.rateCount}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Box display={"flex"} justifyContent={"center"}>
+                                        <Typography color={"textPrimary"} variant={"h6"} align={"center"}>
+                                            هزینه تور:
+                                        </Typography>
+                                        <Typography color={"primary"} variant={"h6"} align={"center"}>
+                                            {tour?.price}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Box display={"flex"} justifyContent={"center"}>
+                                        <Typography color={"textPrimary"} variant={"h6"} align={"center"}>
+                                            ظرفیت باقی مانده:
+                                        </Typography>
+                                        <Typography color={"primary"} variant={"h6"} align={"center"}>
+                                            {tour?.remainingCapacity}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -168,60 +180,23 @@ const Index = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
-                            <GridList cellHeight={200} className={classes.gridList}>
-                                <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
-                                    <ListSubheader component="div"> <Title> تور های اخیر </Title></ListSubheader>
-                                </GridListTile>
-                                {(org?.tours || []).map((tour: any) => (
-                                    <GridListTile key={tour.id}>
-                                        <img src={tour.image} alt={tour.name}/>
-                                        <GridListTileBar
-                                            className={classes.gridTile}
-                                            title={tour.name}
-                                            subtitle={<span>از : {tour.sourcePlace}
-                                                <br/> به : {tour.destinationPlace}  </span>}
-                                            actionIcon={
-                                                <IconButton onClick={e => history.push(Ftour + "/" + tour.id)}
-                                                            aria-label={`اطلاعات بیشتز  ${tour.name}`}
-                                                            className={classes.icon}>
-                                                    <InfoIcon/>
-                                                </IconButton>
-                                            }
-                                        />
-                                    </GridListTile>
-                                ))}
-                            </GridList>
+                            <Title> نقشه راه </Title>
+                            {
+                                tour && tour.sourceGeo &&
+                                <Map stPoint={tour.sourceGeo.coordinates} dsPoint={tour.destinationGeo.coordinates}/>
+                            }
+
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
                             <Grid container wrap="nowrap" spacing={2}>
                                 <Grid item>
-                                    <Title>درباره ما :</Title>
+                                    <Title>درباره تور :</Title>
                                 </Grid>
                                 <Grid item xs>
-                                    <Typography>{org?.description}</Typography>
+                                    <Typography>{tour?.description}</Typography>
                                 </Grid>
-                            </Grid>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <Title>تور لیدر ها: </Title>
-                            <Grid container justify={"center"} spacing={0}>
-                                {
-                                    (org?.leaders || []).map((leader: any) => {
-
-                                        return (
-                                            <Grid key={leader.id} item xs={2} md={1}>
-                                                <Tooltip title={`${leader.name} ${leader.lastname}`}>
-                                                    <Avatar alt={leader.name} className={classes.large}
-                                                            src={leader.image}>ُs</Avatar>
-                                                </Tooltip>
-                                            </Grid>
-                                        )
-                                    })
-                                }
                             </Grid>
                         </Paper>
                     </Grid>
@@ -268,7 +243,7 @@ const Index = () => {
                             <Title> نظرات </Title>
                         </Paper>
                         {
-                            (org?.comments || []).map((comment: any) => {
+                            (tour?.comments || []).map((comment: any) => {
                                     return (<Paper key={comment.id} variant={"outlined"} className={classes.paper}
                                                    style={{marginBottom: '8px', marginTop: "8px"}}>
                                         <Grid container spacing={2}>

@@ -8,6 +8,7 @@ import ValidateUser from "./components/pages/user/validate_user";
 import ForgetPassword from "./components/pages/user/forget_password";
 import Index from "./components/pages/index/index";
 import Tours from "./components/pages/tours/index";
+import Tour from "./components/pages/tour/index";
 import Search from "./components/pages/search/index";
 import SearchResault from "./components/pages/search/resualt/index";
 import MapSearch from "./components/pages/map_search/index";
@@ -31,7 +32,7 @@ import {
     Ftours,
     Forgs,
     Ftours_page,
-    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault, Finfo_user, Forg_page,
+    Forgs_page, FsearchIndex, FsearchResault, FmapSearchIndex, FmapSearchResault, Finfo_user, Forg_page, Ftour_page,
 } from "./util/page_urls";
 import {useCookies} from "react-cookie";
 import {useDispatch} from "react-redux";
@@ -52,6 +53,7 @@ const App: React.FC = () => {
                     <Redirect exact from={Ftours} to={Ftours + "/1"}/>
                     <Redirect exact from={Forgs} to={Forgs + "/1"}/>
                     <Route path={Ftours_page} exact component={Tours}/>
+                    <Route path={Ftour_page} exact component={Tour}/>
                     <Route path={Forgs_page} exact component={Orgs}/>
                     <Route path={Forg_page} exact component={Org}/>
                     <Route path={Findex} exact component={Index}/>

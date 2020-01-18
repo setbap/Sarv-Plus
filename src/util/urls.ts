@@ -23,7 +23,7 @@ export const Bdistant_search = "/explore_tours/distant_search";
 export const Bfull_search = "/explore_tours/full_search";
 export const Bcomment_tour = "/explore_tours/comment_tour";
 export const Brate_tour = "/explore_tours/rate_tour";
-export const Bsingle_tours = "/explore_tours/tours/";
+export const Bsingle_tour = "/explore_tours/tours/";
 
 // ------------end explore tours --------------//
 
