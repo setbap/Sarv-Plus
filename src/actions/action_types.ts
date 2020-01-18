@@ -32,6 +32,8 @@ export const CLEAR_LOADING_GET_LASTEST_TOUR = "CLEAR_LOADING_GET_LASTEST_TOUR";
 
 export const RATE_ORG = "RATE_ORG";
 export const ERR_RATE_ORG = "ERR_RATE_ORG";
+export const COMMENT_ORG = "COMMENT_ORG";
+export const ERR_COMMENT_ORG = "ERR_COMMENT_ORG";
 
 
 export const GET_LASTEST_ORGS = "GET_LASTEST_ORGS";

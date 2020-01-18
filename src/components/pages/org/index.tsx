@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {get_single_org, post_org_rate} from "../../../actions/explore_orgs";
+import {get_single_org, post_org_rate, post_org_comment} from "../../../actions/explore_orgs";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -88,6 +88,7 @@ const useStyles = makeStyles(theme => ({
 
 const Index = () => {
     const [rate, setRate] = React.useState<number | null>(3);
+    const [text, setText] = React.useState<string>("");
     const logged = useLoggend();
     const {id} = useParams();
     const history = useHistory();
@@ -100,6 +101,9 @@ const Index = () => {
     const {org, loading} = useSelector(((state: any) => state.orgs));
     const handleClick = () => {
         dispatch(post_org_rate(rate, id as string))
+    };
+    const handleClickComment = () => {
+        dispatch(post_org_comment(text, id as string))
     };
 
     return (
@@ -238,7 +242,7 @@ const Index = () => {
                     </Grid>)
                 }
 
-                <Grid item xs={12}>
+                {logged && (<Grid item xs={12}>
                     <Paper className={classes.paper}>
                         <Title>ثبت نظر</Title>
                         <TextareaAutosize
@@ -246,18 +250,37 @@ const Index = () => {
                             aria-label="maximum height"
                             rowsMin={8}
                             placeholder=" نظر خود را وارد کنید."
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
 
                         />
-                        <Button variant="contained" color="primary" onClick={handleClick}>
+                        <Button variant="contained" color="primary" onClick={handleClickComment}>
                             ثبت نظر
                         </Button>
                     </Paper>
-                </Grid>
+                </Grid>)}
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                        <Title> سلام </Title>
+                        <Title> نظرات </Title>
                     </Paper>
+                    {
+                        (org?.comments || []).map((comment: any) => {
+                                return (<Paper variant={"outlined"} className={classes.paper}
+                                               style={{marginBottom: '8px', marginTop: "8px"}}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={2}>
+
+                                            <Typography>{comment.nameOfUser} میگه: </Typography>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Typography>{comment.body} </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Paper>)
+                            }
+                        )
+                    }
                 </Grid>
             </Grid>
         </Container>
