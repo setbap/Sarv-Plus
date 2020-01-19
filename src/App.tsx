@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Router, Route, Switch, Redirect} from "react-router-dom";
 import History from "./util/create_history";
 import SignUp from "./components/pages/user/signup";

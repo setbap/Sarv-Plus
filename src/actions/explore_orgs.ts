@@ -32,7 +32,6 @@ export const get_lastest_orgs = () => (dispatch: ThunkDispatch<{}, undefined, an
     })
 };
 
-
 export const get_single_org = (id: string) => (dispatch: ThunkDispatch<{}, undefined, any>) => {
     dispatch({
         type: LOADING_GET_LASTEST_ORGS

@@ -11,7 +11,6 @@ import store from "./store";
 ReactDOM.render(
 	<Provider store={store}>
 		<ThemeProvider theme={theme}>
-			{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 			<CssBaseline />
 			<App />
 		</ThemeProvider>

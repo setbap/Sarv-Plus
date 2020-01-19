@@ -148,7 +148,7 @@ const SearchResault = () => {
                         {
                             query ? (
                                 <>
-                                    {console.log("oooo", query.toString())}
+
                                     <Map
                                         radius={(query && query.get("distant")) || 1}
                                         lng={(query && query.get("lng")) || 1}

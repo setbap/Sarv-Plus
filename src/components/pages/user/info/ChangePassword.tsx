@@ -3,12 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import Title from './Title';
 import Grid from "@material-ui/core/Grid";
-import {FormControl} from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
-import {setNewInfo, setNewPass} from "../../../../actions/user_auth";
+import {setNewPass, iWantToBeTourLeader} from "../../../../actions/user_auth";
 
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +39,10 @@ export const ChangePassword = () => {
         event.preventDefault();
         dispatch(setNewPass(state));
         console.log(state);
+    }
 
+    const okayTourLeader = (event: any) => {
+        dispatch(iWantToBeTourLeader());
     }
 
 
@@ -76,6 +76,10 @@ export const ChangePassword = () => {
                             float: "left"
                         }}>تغییر گذرواژه</Button>
                     </Grid>
+
+                    <Button type={"submit"} variant={"outlined"} color="primary" onClick={okayTourLeader} style={{
+                        float: "left"
+                    }}>تغadssdasdasdasه</Button>
                 </Grid>
             </form>
         </React.Fragment>

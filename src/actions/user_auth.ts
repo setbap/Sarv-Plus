@@ -29,7 +29,7 @@ import {
     Bvalidate_user,
     Breset_password_user,
     Bset_new_reset_password_user,
-    Bget_me_user, Bset_update_me, Bchange_password
+    Bget_me_user, Bset_update_me, Bchange_password, Bi_want_to_be_tour_leader
 } from '../util/urls';
 
 
@@ -139,7 +139,7 @@ export const setResetPassword = (newPass: setNewResetPasswordInterface) => (disp
 
 export const getInfo = () => (dispatch: ThunkDispatch<{}, undefined, any>) => {
     axios.post(Bget_me_user).then(res => {
-        console.log("info" , res.data)
+        console.log("info", res.data)
         dispatch({
             type: GET_USER_INFO,
             payload: res.data
@@ -181,5 +181,15 @@ export const setNewPass = (passes: any) => (dispatch: ThunkDispatch<{}, undefine
             payload: ""
         });
         toast.error(" خطا در تغییر گذرواژه.", {autoClose: 4000})
+    })
+};
+
+
+export const iWantToBeTourLeader = () => (dispatch: ThunkDispatch<{}, undefined, any>) => {
+    axios.post(Bi_want_to_be_tour_leader).then(res => {
+        toast.success("شما اکنون میتوانید تور لیدر شوید.")
+    }).catch(err => {
+        console.log(err);
+        toast.error(" خطا در درخواست.", {autoClose: 4000})
     })
 };

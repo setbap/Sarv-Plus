@@ -7,7 +7,16 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Flogin_user, Fsignup, Findex, Finfo_user} from "../../util/page_urls";
+import {
+    Flogin_user,
+    Fsignup,
+    Findex,
+    Finfo_user,
+    Ftours,
+    Forgs,
+    FsearchIndex,
+    FmapSearchIndex
+} from "../../util/page_urls";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -51,10 +60,10 @@ const HeaderBar: React.FC = () => {
     const [cookies, , remove] = useCookies(["jwtToken"]);
     const logout = () => {
         remove("jwtToken");
-		setName("");
-		setTokenToHeader("");
+        setName("");
+        setTokenToHeader("");
 
-	};
+    };
     const isLogged = useLoggend();
 
     const [name, setName] = useState("");
@@ -65,7 +74,7 @@ const HeaderBar: React.FC = () => {
         } else {
             setName("")
         }
-    }, [isLogged]);
+    }, [isLogged, cookies.jwtToken]);
 
 
     const [state, setState] = React.useState({
@@ -96,16 +105,45 @@ const HeaderBar: React.FC = () => {
             onKeyDown={toggleDrawer(side, false)}
         >
             <List>
-                {["Inbox", "Starred", "Send email", "Drafts"].map(
-                    (text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItem>
-                    ),
-                )}
+                <ListItem button onClick={() => history.push(Findex)}>
+                    <ListItemIcon>
+                        <InboxIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"صفحه اصلی"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push(Ftours)}>
+                    <ListItemIcon>
+                        <InboxIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"تور ها"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push(Forgs)}>
+                    <ListItemIcon>
+                        <InboxIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"سازمان ها"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push(FsearchIndex)}>
+                    <ListItemIcon>
+                        <InboxIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"جست و جو"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push(FmapSearchIndex)}>
+                    <ListItemIcon>
+                        <InboxIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"جست و جو با نقشه"}/>
+                </ListItem>
+                {
+                    isLogged &&
+                    <ListItem button onClick={() => history.push(Finfo_user)}>
+                        <ListItemIcon>
+                            <InboxIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={"اطلاعات شخصی"}/>
+                    </ListItem>
+                }
             </List>
             <Divider/>
             <List>

@@ -64,11 +64,12 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(6),
     },
     aboutItem: {
-        transition: "all 1s",
+        transition: "all 1s ease-out",
         "&:hover": {
             backgroundColor: "white",
             transform: "scale(1.1)",
-            borderRadius: theme.shape.borderRadius,
+            borderRadius: `${theme.spacing(4)}px`,
+
         },
     },
     textCen: {

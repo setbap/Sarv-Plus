@@ -3,8 +3,7 @@ import Container from "@material-ui/core/Container";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import {DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
-import Input from "@material-ui/core/Input";
+import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import SearchIcon from '@material-ui/icons/Search';
 import {ChangeEvent, useState} from "react";
 import TextField from "@material-ui/core/TextField";
@@ -12,8 +11,6 @@ import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/dayjs';
 import {useHistory} from "react-router-dom";
 import Map_wrapper from "./map_wrapper";
-
-import {Divider} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {FmapSearchResault, FsearchResault} from "../../../util/page_urls";
 
