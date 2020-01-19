@@ -138,7 +138,7 @@ export const setResetPassword = (newPass: setNewResetPasswordInterface) => (disp
 
 
 export const getInfo = () => (dispatch: ThunkDispatch<{}, undefined, any>) => {
-    axios.post(Bget_me_user).then(res => {
+    axios.get(Bget_me_user).then(res => {
         console.log("info", res.data)
         dispatch({
             type: GET_USER_INFO,

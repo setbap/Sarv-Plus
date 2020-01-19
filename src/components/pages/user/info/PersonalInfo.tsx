@@ -51,8 +51,6 @@ export const PersonalInfo = () => {
     const formSubmit = (event: any) => {
         event.preventDefault();
         dispatch(setNewInfo(state));
-        console.log(state);
-
     }
 
 
