@@ -15,6 +15,7 @@ import DayJs from "dayjs";
 import {Divider} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {FsearchResault} from "../../../util/page_urls";
+import Footer from "../../layouts/Footer";
 
 
 const useStyle = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const useStyle = makeStyles((theme) => ({
         margin: theme.spacing(2)
     },
     searchForm: {
-        border: "2px solid gray",
+        border: `2px solid ${theme.palette.secondary.main}`,
         padding: theme.spacing(4),
         borderRadius: theme.shape.borderRadius,
     },
@@ -89,11 +90,17 @@ const Search = (props: any) => {
     };
 
     return (
+        <>
         <Container maxWidth={"md"}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Typography className={classes.headText} align={"center"} variant={"h4"}>
+                <Typography className={classes.headText} color={"secondary"} align={"center"} variant={"h4"}>
                     جست و جو در میان تور ها
                 </Typography>
+
+                
+                <Box fontWeight={600} fontSize={12} >
+                                    * فقط ایتم هایی که تغییر داده میشوند جست و جو میشوند.
+                                </Box>
 
                 <Box className={classes.searchForm}>
 
@@ -150,7 +157,6 @@ const Search = (props: any) => {
                                 <Typography>
                                     از قیمت
                                 </Typography>
-
 
                                 <Box>
 
@@ -224,7 +230,7 @@ const Search = (props: any) => {
                                 <Box>
                                     <DatePicker
                                         name={"lowStartDate"}
-                                        value={state.lowStartDate}
+                                        value={state.lowStartDate  || new Date()}
                                         onChange={(date) => changeTimeHandler("lowStartDate", date)}
                                         label="از"
                                         inputVariant="outlined"
@@ -247,7 +253,7 @@ const Search = (props: any) => {
                                 <Box>
                                     <DatePicker
                                         name={"highStartDate"}
-                                        value={state.highStartDate}
+                                        value={state.highStartDate || new Date()}
                                         onChange={(date) => changeTimeHandler("highStartDate", date)}
                                         label="تا"
                                         inputVariant="outlined"
@@ -275,7 +281,7 @@ const Search = (props: any) => {
                                 <Box>
                                     <DatePicker
                                         name={"lowFinishDate"}
-                                        value={state.lowFinishDate}
+                                        value={state.lowFinishDate || new Date()}
                                         onChange={(date) => changeTimeHandler("lowFinishDate", date)}
                                         label="از"
                                         inputVariant="outlined"
@@ -297,7 +303,7 @@ const Search = (props: any) => {
                                 <Box>
                                     <DatePicker
                                         name={"highFinishDate"}
-                                        value={state.highFinishDate}
+                                        value={state.highFinishDate || new Date()}
                                         onChange={(date) => changeTimeHandler("highFinishDate", date)}
                                         label="تا"
                                         inputVariant="outlined"
@@ -327,6 +333,8 @@ const Search = (props: any) => {
                 </Box>
             </MuiPickersUtilsProvider>
         </Container>
+                    <Footer/>
+</>
     )
 };
 

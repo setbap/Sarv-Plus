@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import SearchIcon from '@material-ui/icons/Search';
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useState , useEffect} from "react";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/dayjs';
@@ -13,6 +13,7 @@ import {useHistory} from "react-router-dom";
 import Map_wrapper from "./map_wrapper";
 import Button from "@material-ui/core/Button";
 import {FmapSearchResault, FsearchResault} from "../../../util/page_urls";
+import Footer from "../../layouts/Footer";
 
 
 const useStyle = makeStyles((theme) => ({
@@ -20,7 +21,7 @@ const useStyle = makeStyles((theme) => ({
         margin: theme.spacing(2)
     },
     searchForm: {
-        border: "2px solid gray",
+        border: `2px solid ${theme.palette.secondary.main}`,
         padding: theme.spacing(4),
         borderRadius: theme.shape.borderRadius,
     },
@@ -41,7 +42,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const Search = (props: any) => {
-
+    const [isSelected , setIsSelected] = useState(false)
     const classes = useStyle();
     const history = useHistory();
     const [state, setState] = useState({
@@ -50,8 +51,13 @@ const Search = (props: any) => {
         lng: ""
     });
 
+    useEffect(() => {
+        if (!isSelected && state.lat && state.lng) {
+            setIsSelected(true)
+        }
+    },[state])
+
     const mapAdderFunc = (e: any) => {
-        console.log(e.latlng);
         setState((prevState) => ({
             lat: e.latlng.lat,
             lng: e.latlng.lng,
@@ -61,7 +67,6 @@ const Search = (props: any) => {
     };
 
     const searchTour = () => {
-        console.log(state);
         // const urlParam = new URLSearchParams();
         const urlParam = Object.keys(state).map((key) => {
             // @ts-ignore
@@ -76,25 +81,33 @@ const Search = (props: any) => {
         e.persist();
         setState((val: any) => ({
             ...val,
-            [e.target.name]: e.target.value
+            [e.target.name]: +e.target.value >0 ? +e.target.value : 0
         }))
 
     };
 
 
     return (
+        <>
         <Container maxWidth={"md"}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Typography className={classes.headText} align={"center"} variant={"h4"}>
-                    جست و جو در میان تور ها
+            <Typography className={classes.headText} color={"secondary"} align={"center"} variant={"h4"}>
+                    جست و جو با استفاده از نقشه
                 </Typography>
+                <Box fontWeight={600} fontSize={12} >
+                                    *ایتدا برای جست و جو یک نقطه در نقشه انتخاب کنید.
+                                </Box>
+                                <Box fontWeight={600} fontSize={12} >
+                                    *سپس شعاع را وارد کنید.
+                                </Box>
 
                 <Box className={classes.searchForm}>
                     <div>
                         <Map_wrapper adder={mapAdderFunc} markersData={state}/>
-
+                        {!isSelected && <Box fontWeight={600} fontSize={12} color={"red"} >
+                       * یک نقطه را انتخاب کنید.
+    </Box> }
                     </div>
-
                     <Grid className={classes.searchItem} container spacing={2}>
                         <Grid item xs={12} md={6}>
                             <Box alignItems="center" justifyContent={"center"} display={'flex'} flexDirection="row">
@@ -109,7 +122,7 @@ const Search = (props: any) => {
                                         type={"number"}
                                         value={state.distant}
                                         onChange={radiusChangeHandler}
-                                        label="از"
+                                        label="متر"
                                         variant={"outlined"}
                                     />
 
@@ -119,14 +132,13 @@ const Search = (props: any) => {
 
                         </Grid>
                     </Grid>
-
-
                     <Box component={"div"} display={"flex"} justifyContent={"flex-end"}>
                         <Button
                             onClick={searchTour}
                             variant="contained"
                             color="primary"
                             size="large"
+                            disabled={ (isSelected && +state.distant) ? false:true}
                             className={classes.button}
                             startIcon={<SearchIcon className={classes.iconPadding}/>}
                         >
@@ -136,6 +148,8 @@ const Search = (props: any) => {
                 </Box>
             </MuiPickersUtilsProvider>
         </Container>
+        <Footer />
+        </>
     )
 };
 

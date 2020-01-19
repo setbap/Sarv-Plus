@@ -19,12 +19,14 @@ import {
 } from "../../util/page_urls";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import SearchIcon from '@material-ui/icons/Search';
+import MapIcon from '@material-ui/icons/Map';
+import CardTravelIcon from '@material-ui/icons/CardTravel';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {useLoggend} from '../../util/isLogged';
@@ -38,8 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
             flexGrow: 1,
         },
         menuButton: {
-            marginRight: theme.spacing(2),
-            marginLeft: theme.spacing(2),
+            marginRight: theme.spacing(1),
+            marginLeft: theme.spacing(1),
         },
         title: {
             flexGrow: 1,
@@ -107,31 +109,31 @@ const HeaderBar: React.FC = () => {
             <List>
                 <ListItem button onClick={() => history.push(Findex)}>
                     <ListItemIcon>
-                        <InboxIcon/>
+                        <InboxIcon color="secondary" />
                     </ListItemIcon>
                     <ListItemText primary={"صفحه اصلی"}/>
                 </ListItem>
                 <ListItem button onClick={() => history.push(Ftours)}>
                     <ListItemIcon>
-                        <InboxIcon/>
+                        <CardTravelIcon color="secondary"/>
                     </ListItemIcon>
                     <ListItemText primary={"تور ها"}/>
                 </ListItem>
                 <ListItem button onClick={() => history.push(Forgs)}>
                     <ListItemIcon>
-                        <InboxIcon/>
+                        <PeopleAltIcon color="secondary"/>
                     </ListItemIcon>
                     <ListItemText primary={"سازمان ها"}/>
                 </ListItem>
                 <ListItem button onClick={() => history.push(FsearchIndex)}>
                     <ListItemIcon>
-                        <InboxIcon/>
+                        <SearchIcon color="secondary"/>
                     </ListItemIcon>
                     <ListItemText primary={"جست و جو"}/>
                 </ListItem>
                 <ListItem button onClick={() => history.push(FmapSearchIndex)}>
                     <ListItemIcon>
-                        <InboxIcon/>
+                        <MapIcon color="secondary"/>
                     </ListItemIcon>
                     <ListItemText primary={"جست و جو با نقشه"}/>
                 </ListItem>
@@ -145,17 +147,6 @@ const HeaderBar: React.FC = () => {
                     </ListItem>
                 }
             </List>
-            <Divider/>
-            <List>
-                {["All mail", "Trash", "Spam"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                        </ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
-            </List>
         </div>
     );
 
@@ -166,7 +157,7 @@ const HeaderBar: React.FC = () => {
                     <IconButton
                         edge="start"
                         className={classes.menuButton}
-                        color="inherit"
+                        color="secondary"
                         aria-label="menu"
                         onClick={toggleDrawer("left", true)}
                     >
@@ -174,8 +165,8 @@ const HeaderBar: React.FC = () => {
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         <Button
-                            color="inherit"
-                            variant="outlined"
+                            color="secondary"
+                            variant="contained"
                             onClick={() => history.push(Findex)}
                         >
                             {header}
@@ -189,8 +180,8 @@ const HeaderBar: React.FC = () => {
                                     onClick={() => {
                                         history.push(Finfo_user);
                                     }}
-                                    variant="outlined"
-                                    color="inherit"
+                                    color="secondary"
+                                    variant="contained"
                                     className={classes.menuButton}
                                 >
                                     سلام {` ${name}  `}
@@ -200,8 +191,8 @@ const HeaderBar: React.FC = () => {
                                         logout();
                                         history.push(Flogin_user);
                                     }}
-                                    variant="outlined"
-                                    color="inherit"
+                                    color="secondary"
+                                    variant="contained"
                                     className={classes.menuButton}
                                 >
                                     خروج
@@ -213,17 +204,17 @@ const HeaderBar: React.FC = () => {
                             (<>
                                 <Button
                                     onClick={() => history.push(Flogin_user)}
-                                    variant="outlined"
-                                    color="inherit"
+                                    color="secondary"
+                                    variant="contained"
                                     className={classes.menuButton}
                                 >
                                     ورود
                                 </Button>
                                 <Button
                                     onClick={() => history.push(Fsignup)}
-                                    variant="outlined"
-                                    color="inherit"
-                                >
+                                    color="secondary"
+                                    variant="contained"
+                                     >
                                     ایجاد حساب
                                 </Button>
                             </>)

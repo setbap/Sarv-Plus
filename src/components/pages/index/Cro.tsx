@@ -18,24 +18,25 @@ const useStyles = makeStyles((theme) => ({
         height: "50vh",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "transparent",
         flexDirection: "column-reverse",
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
 
-        // backgroundBlendMode: "color-dodge",
+        backgroundBlendMode: "overlay",
     },
     croText: {
         width: "max-content",
-        height: "100px",
+        
         alignSelf: "center",
-
         margin: theme.spacing(2),
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         borderRadius: `${theme.spacing(2)}px`,
+        // border:`2px solid ${theme.palette.secondary.main}`,
+        border:`2px solid rgba(60,60,60,0.5)`,
         zIndex: 1601,
-        color: theme.palette.text.secondary,
-        backgroundColor: "rgba(66,66,66,0.4)",
+        backdropFilter:"blur(15px)",
+        color: theme.palette.secondary.main,
+        backgroundColor: "rgba(60,60,60,0.5)",
         bottom: "0",
     },
 }));
@@ -64,12 +65,12 @@ export const Cro = () => {
                 {items.map((i) => (
                     <div
                         key={i.name}
-                        style={{backgroundImage: `url(${i.img})`}}
+                        style={{backgroundImage: `linear-gradient(to right, #39761F, #6E1335), url(${i.img})`}}
                         className={classes.croPage}
                     >
                         <div className={classes.croText}>
                             <Typography variant="h2" component="div">
-                                <Box textAlign="center">{i.name}</Box>
+                                <Box fontWeight={700} textAlign="center">{i.name}</Box>
                             </Typography>
                         </div>
                     </div>

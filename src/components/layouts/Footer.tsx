@@ -8,7 +8,7 @@ function Copyright() {
 		<Typography variant="body2" color="textSecondary" align="center">
 			{"Copyright © "}
 			<Link color="inherit" href="https://material-ui.com/">
-				Your Website
+				سایت تور و گردشگری جیجو
 			</Link>{" "}
 			{new Date().getFullYear()}
 			{"."}
@@ -18,8 +18,9 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
 	footer: {
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.palette.background.default,
 		padding: theme.spacing(6),
+
 	},
 }));
 
@@ -37,7 +38,7 @@ export default function Footer() {
 				color="textSecondary"
 				component="p"
 			>
-				Something here to give the footer a purpose!
+				جیجو هیج شعبه دیکری ندارد!!!
 			</Typography>
 			<Copyright />
 		</footer>
