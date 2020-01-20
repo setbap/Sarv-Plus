@@ -11,19 +11,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Link as RLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import Pagination from "material-ui-flat-pagination";
 import { get_lastest_tours_with_page } from "../../../actions/explore_tours";
 import { useHistory } from "react-router-dom";
 import Footer from "../../layouts/Footer";
 import { headerName } from "../../../actions/user_auth";
-import { Ftours_page, Ftours } from "../../../util/page_urls";
+import { Ftours } from "../../../util/page_urls";
 
 const useStyles = makeStyles((theme) => ({
 	fullpage: {
 		minHeight: "100vh",
-
 	},
 	itemSpace: {
 		marginTop: theme.spacing(2),
@@ -73,7 +72,7 @@ export default function Tours() {
 
 	useEffect(() => {
 		dispatch(headerName("اخرین تور ها"));
-	}, []);
+	}, [dispatch]);
 
 	const { tours, loading } = useSelector((state: any) => {
 		if (state.tours) {

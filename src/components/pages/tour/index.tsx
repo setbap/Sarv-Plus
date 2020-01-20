@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
-import {useParams, useHistory} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Map from './map_wrapper'
 import Button from '@material-ui/core/Button';
@@ -14,7 +14,6 @@ import Rating from '@material-ui/lab/Rating';
 import {useLoggend} from "../../../util/isLogged";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Footer from "../../layouts/Footer";
-import {Simulate} from "react-dom/test-utils";
 
 
 const Title = (props: any) => {
@@ -84,14 +83,14 @@ const Index = () => {
     const [text, setText] = React.useState<string>("");
     const logged = useLoggend();
     const {id} = useParams();
-    const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles();
     useEffect(() => {
         dispatch(get_single_tour(id as string))
+        // eslint-disable-next-line
     }, [id]);
 
-    const {tour, loading} = useSelector(((state: any) => state.tours));
+    const {tour} = useSelector(((state: any) => state.tours));
     const handleClick = () => {
         dispatch(post_tour_rate(rate, id as string))
     };

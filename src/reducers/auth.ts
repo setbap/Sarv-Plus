@@ -1,8 +1,7 @@
 import {
     LOGIN, GET_USER_INFO
 } from "../actions/action_types";
-import {setTokenToHeader} from "../util/axios_config";
-import {useCookies} from "react-cookie";
+import { setTokenToHeader } from "../util/axios_config";
 
 // import createHistory from "../util/create_history";
 

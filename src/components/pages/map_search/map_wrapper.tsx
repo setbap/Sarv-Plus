@@ -1,77 +1,80 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import L from "leaflet";
 
 const style = {
-    width: "100%",
-    height: "100%"
+	width: "100%",
+	height: "100%",
 };
 
-const Map = ({markersData, adder}: { markersData: any, adder: any }) => {
+const Map = ({ markersData, adder }: { markersData: any; adder: any }) => {
+	const mapRef = useRef<any>(null);
+	useEffect(() => {
+		mapRef.current = L.map("map", {
+			center: [36.61, 52.27],
+			zoom: 10,
+			layers: [
+				L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+					attribution:
+						'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+				}),
+			],
+		});
+	}, []);
 
-    const mapRef = useRef<any>(null);
-    useEffect(() => {
-        mapRef.current = L.map("map", {
-            center: [36.61, 52.27],
-            zoom: 10,
-            layers: [
-                L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-                    attribution:
-                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                })
-            ]
-        });
-    }, []);
+	// add layer
+	const layerRef = useRef<any>(null);
+	useEffect(() => {
+		layerRef.current = L.layerGroup().addTo(mapRef.current);
+	}, []);
 
-    // add layer
-    const layerRef = useRef<any>(null);
-    useEffect(() => {
-        layerRef.current = L.layerGroup().addTo(mapRef.current);
-    }, []);
+	useEffect(() => {
+		if (+markersData.lat && +markersData.lng && layerRef.current) {
+			console.log("loog", markersData);
+		}
+		console.log("loog2");
+		// eslint-disable-next-line
+	}, [markersData.lat, markersData.lng]);
 
-    useEffect(() => {
-        if (+markersData.lat && +markersData.lng && layerRef.current) {
+	const addMarker = (e: any) => {
+		// Add marker to map at click location; add popup window
+		// var newMarker = new L.marker(e.latlng).addTo(mapRef.current);
 
-            console.log("loog", markersData)
-        }
-        console.log("loog2")
+		adder(e);
+	};
 
-    }, [markersData.lat, markersData.lng]);
+	useEffect(() => {
+		if (mapRef.current) {
+			mapRef.current.on("click", addMarker);
+		}
+		// eslint-disable-next-line
+	}, [mapRef]);
 
+	// update markers
+	useEffect(() => {
+		layerRef.current.clearLayers();
+		if (+markersData.distant)
+			L.circle(markersData, {
+				color: "red",
+				fillColor: "#f03",
+				fillOpacity: 0.5,
+				radius: markersData.distant,
+			}).addTo(layerRef.current);
+		L.marker(markersData, { title: "markersData.title" })
+			.bindPopup("محدوده مکان شروع")
+			.openPopup()
+			.addTo(layerRef.current);
+	}, [markersData]);
 
-    const addMarker = (e: any) => {
-        // Add marker to map at click location; add popup window
-        // var newMarker = new L.marker(e.latlng).addTo(mapRef.current);
-
-        adder(e);
-    };
-
-    useEffect(() => {
-        if (mapRef.current) {
-            mapRef.current.on("click", addMarker);
-        }
-    }, [mapRef]);
-
-    // update markers
-    useEffect(() => {
-        layerRef.current.clearLayers();
-        if (+markersData.distant) L.circle(markersData, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: markersData.distant
-        }).addTo(layerRef.current);
-        L.marker(markersData, {title: "markersData.title"}).bindPopup('محدوده مکان شروع').openPopup().addTo(layerRef.current);
-
-    }, [markersData]);
-
-    return (<div style={{
-        width: "100%",
-        height: "300px ",
-
-
-    }}>
-        <div id="map" style={style}/>
-    </div>)
-}
+	return (
+		<div
+			style={{
+				width: "100%",
+				height: "300px ",
+			}}
+		>
+			<div id="map" style={style} />
+		</div>
+	);
+};
 
 export default Map;

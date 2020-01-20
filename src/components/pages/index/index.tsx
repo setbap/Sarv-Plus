@@ -24,6 +24,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from "../../layouts/Footer";
 import {Forg, Forgs, Ftour, Ftours} from "../../../util/page_urls";
 import {headerName} from "../../../actions/user_auth";
+import logo from '../../../assets/images/jijo.png'
 
 const useStyles = makeStyles((theme) => ({
     itemSpace: {
@@ -37,8 +38,19 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
     },
     heroContent: {
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.secondary.main,
+        backgroundImage : `url(${logo})`,
+        backgroundSize:     "fit",                      /* <------ */
+        backgroundRepeat:   "no-repeat",
+        backgroundPosition: "center center",
+    },
+    heroWrapper : {
         padding: theme.spacing(8, 0, 6),
+        width:"100%",
+        height:"100%",
+        // backgroundColor: theme.palette.background.default,
+        backdropFilter:'blur(15px)' ,
+
     },
     heroButtons: {
         marginTop: theme.spacing(4),
@@ -110,6 +122,7 @@ export default function Index() {
 
                 <CssBaseline/>
                 <div className={classes.heroContent}>
+                <div className={classes.heroWrapper}>
                     <Container maxWidth="lg">
                         <Typography
                             component="h1"
@@ -146,6 +159,7 @@ export default function Index() {
                             </Grid>
                         </div>
                     </Container>
+                </div>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}

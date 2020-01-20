@@ -21,7 +21,6 @@ import {Ftour} from "../../../util/page_urls";
 import Rating from '@material-ui/lab/Rating';
 import {useLoggend} from "../../../util/isLogged";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import theme from "../../../theme";
 import Footer from "../../layouts/Footer";
 
 
@@ -97,9 +96,10 @@ const Index = () => {
     const classes = useStyles();
     useEffect(() => {
         dispatch(get_single_org(id as string))
+        // eslint-disable-next-line
     }, [id]);
 
-    const {org, loading} = useSelector(((state: any) => state.orgs));
+    const {org} = useSelector(((state: any) => state.orgs));
     const handleClick = () => {
         dispatch(post_org_rate(rate, id as string))
     };

@@ -1,64 +1,83 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import L from "leaflet";
 
 const style = {
-    width: "100%",
-    height: "100%"
+	width: "100%",
+	height: "100%",
 };
 
-const Map = ({markersData, radius, lat, lng}: { markersData: any, radius: any, lat: any, lng: any }) => {
+const Map = ({
+	markersData,
+	radius,
+	lat,
+	lng,
+}: {
+	markersData: any;
+	radius: any;
+	lat: any;
+	lng: any;
+}) => {
+	const mapRef = useRef<any>(null);
+	useEffect(() => {
+		mapRef.current = L.map("map", {
+			center: [lat, lng],
+			zoom: 8,
+			layers: [
+				L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+					attribution:
+						'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+				}),
+			],
+		});
+		// eslint-disable-next-line
+	}, []);
 
-    const mapRef = useRef<any>(null);
-    useEffect(() => {
-        mapRef.current = L.map("map", {
-            center: [lat, lng],
-            zoom: 8,
-            layers: [
-                L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-                    attribution:
-                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                })
-            ]
-        });
-    }, []);
+	// add layer
+	const layerRef = useRef<any>(null);
+	useEffect(() => {
+		layerRef.current = L.layerGroup().addTo(mapRef.current);
+	}, []);
 
-    // add layer
-    const layerRef = useRef<any>(null);
-    useEffect(() => {
-        layerRef.current = L.layerGroup().addTo(mapRef.current);
-    }, []);
+	useEffect(() => {
+		if (+markersData.lat && +markersData.lng && layerRef.current) {
+			console.log("loog", markersData);
+		}
+		console.log("loog2");
+		// eslint-disable-next-line
+	}, [markersData.lat, markersData.lng]);
 
-    useEffect(() => {
-        if (+markersData.lat && +markersData.lng && layerRef.current) {
+	// update markers
+	useEffect(() => {
+		layerRef.current.clearLayers();
+		if ({ lng, lat })
+			L.circle(
+				{ lng, lat },
+				{
+					color: "red",
+					fillColor: "#f03",
+					fillOpacity: 0.5,
+					radius: radius,
+				},
+			).addTo(layerRef.current);
+		markersData.forEach((marker: any) => {
+			L.marker(marker, { title: marker.title })
+				.bindPopup(marker.title)
+				.openPopup()
+				.addTo(layerRef.current);
+		});
+		// eslint-disable-next-line
+	}, [markersData]);
 
-            console.log("loog", markersData)
-        }
-        console.log("loog2")
-
-    }, [markersData.lat, markersData.lng]);
-
-    // update markers
-    useEffect(() => {
-        layerRef.current.clearLayers();
-        if ({lng, lat}) L.circle({lng, lat}, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: radius
-        }).addTo(layerRef.current);
-        markersData.forEach((marker: any) => {
-            L.marker(marker, {title: marker.title}).bindPopup(marker.title).openPopup().addTo(layerRef.current);
-        });
-    }, [markersData]);
-
-    return (<div style={{
-        width: "100%",
-        height: "300px ",
-
-
-    }}>
-        <div id="map" style={style}/>
-    </div>)
-}
+	return (
+		<div
+			style={{
+				width: "100%",
+				height: "300px ",
+			}}
+		>
+			<div id="map" style={style} />
+		</div>
+	);
+};
 
 export default Map;
